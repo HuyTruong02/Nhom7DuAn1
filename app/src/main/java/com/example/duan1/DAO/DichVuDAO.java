@@ -17,59 +17,58 @@ public class DichVuDAO {
 
     public DichVuDAO(Context mContext) {
         DbHelper dbHelper = new DbHelper(mContext);
-        db= dbHelper.getWritableDatabase();
+        db = dbHelper.getWritableDatabase();
     }
-   @SuppressLint("Range")
-   public List<DichVu>  get(String sql, String...selectArgs){
-    List<DichVu> listdv = new ArrayList<>();
-    Cursor cursor = db.rawQuery(sql, selectArgs);
-    while (cursor.moveToNext()){
-        DichVu dichVu = new DichVu();
-        dichVu.setMaDv(cursor.getString(cursor.getColumnIndex("MaDv")));
-        dichVu.setTenDV(cursor.getString(cursor.getColumnIndex("TenDv")));
-        dichVu.setMota(cursor.getString(cursor.getColumnIndex("MoTa")));
-        dichVu.setGiaDV(cursor.getInt(cursor.getColumnIndex("GiaDv")));
 
-        listdv.add(dichVu);
-
+    @SuppressLint("Range")
+    public List<DichVu> get(String sql, String... selectArgs) {
+        List<DichVu> listdv = new ArrayList<>();
+        Cursor cursor = db.rawQuery(sql, selectArgs);
+        while (cursor.moveToNext()) {
+            DichVu dichVu = new DichVu();
+            dichVu.setMaDv(cursor.getString(cursor.getColumnIndex("MaDv")));
+            dichVu.setTenDV(cursor.getString(cursor.getColumnIndex("TenDv")));
+            dichVu.setMota(cursor.getString(cursor.getColumnIndex("MoTa")));
+            dichVu.setGiaDV(cursor.getInt(cursor.getColumnIndex("GiaDv")));
+            listdv.add(dichVu);
+        }
+        return listdv;
     }
-    return listdv;
-   }
-   public List<DichVu> getAll(){
+
+    public List<DichVu> getAll() {
         String sql = "SELECT * FROM DICHVU";
-
         return get(sql);
-   }
+    }
 
-   public DichVu getById(String MaDv){
+    public DichVu getById(String MaDv) {
         String sql = "SELECT * FROM DICHVU WHERE MaDv = ?";
-        List<DichVu> listdv = get(sql,MaDv);
+        List<DichVu> listdv = get(sql, MaDv);
         return listdv.get(0);
-   }
-
-   public  long insert (DichVu dichVu){
-        ContentValues values = new ContentValues();
-        values.put("MaDv",dichVu.getMaDv());
-        values.put("TenDv",dichVu.getTenDV());
-        values.put("GiaDv",dichVu.getGiaDV());
-        values.put("MoTa",dichVu.getMota());
-
-        return db.insert("DICHVU",null,values);
-   }
-
-    public  long update (DichVu dichVu){
-        ContentValues values = new ContentValues();
-        values.put("TenDv",dichVu.getTenDV());
-        values.put("GiaDv",dichVu.getGiaDV());
-        values.put("MoTa",dichVu.getMota());
-
-        return db.update("DICHVU",values,"MaDv=?",new String[]{dichVu.getMaDv()});
-
-    }
-    public  long delete (String MaDv){
-        return db.delete("DichVu","maDV=?",new String[]{MaDv});
     }
 
+    public long insert(DichVu dichVu) {
+        ContentValues values = new ContentValues();
+        values.put("MaDv", dichVu.getMaDv());
+        values.put("TenDv", dichVu.getTenDV());
+        values.put("GiaDv", dichVu.getGiaDV());
+        values.put("MoTa", dichVu.getMota());
+
+        return db.insert("DICHVU", null, values);
+    }
+
+    public long update(DichVu dichVu) {
+        ContentValues values = new ContentValues();
+        values.put("TenDv", dichVu.getTenDV());
+        values.put("GiaDv", dichVu.getGiaDV());
+        values.put("MoTa", dichVu.getMota());
+
+        return db.update("DICHVU", values, "MaDv=?", new String[]{dichVu.getMaDv()});
+
+    }
+
+    public long delete(String MaDv) {
+        return db.delete("DichVu", "maDV=?", new String[]{MaDv});
+    }
 
 
 }

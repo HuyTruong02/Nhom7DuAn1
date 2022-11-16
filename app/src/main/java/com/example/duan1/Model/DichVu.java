@@ -1,10 +1,10 @@
 package com.example.duan1.Model;
 
 public class DichVu {
-private  String MaDv;
-private String TenDV;
-private int GiaDV;
-private String Mota;
+    private String MaDv;
+    private String TenDV;
+    private int GiaDV;
+    private String Mota;
 
     public DichVu() {
 
