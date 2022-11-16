@@ -6,9 +6,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class DbHelper extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "QLPT";
-    private static final int DB_VERSION = 7;
+    private static final int DB_VERSION = 8;
     //---------------------------------
     //duyettao
     static final String CREATE_TABLE_PHONG =
@@ -24,10 +24,10 @@ public class DbHelper extends SQLiteOpenHelper {
             "SoPhong INTERGER  NOT NULL)";
     //---------------------------------
     static final String CREATE_TABLE_DICH_VU =
-            "create table DichVu (maDV INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "tenDV TEXT NOT NULL, " +
-                    "giaDV TEXT NOT NULL, " +
-                    "moTa TEXT NOT NULL)";
+            "create table DichVu (MaDV INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "TenDV TEXT NOT NULL, " +
+                    "GiaDV INTEGER NOT NULL, " +
+                    "MoTa TEXT NOT NULL)";
     //---------------------------------
     static final String CREATE_TABLE_HOP_DONG =
             "create table HopDong (maHopDong INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -53,7 +53,7 @@ public class DbHelper extends SQLiteOpenHelper {
                     "maDV INTEGER REFERENCES DichVu(maDV)," +
                     "maHopDong INTEGER REFERENCES HopDong(maHopDong))";
 
-    public DbHelper(@Nullable Context context) {
+    public DBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
