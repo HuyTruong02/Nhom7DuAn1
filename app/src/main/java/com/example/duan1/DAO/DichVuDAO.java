@@ -7,7 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.duan1.Model.DichVu;
-import com.example.duan1.Sqlite.DBHelper;
+import com.example.duan1.database.DbHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class DichVuDAO {
     private SQLiteDatabase db;
 
     public DichVuDAO(Context mContext) {
-        DBHelper dbHelper = new DBHelper(mContext);
+        DbHelper dbHelper = new DbHelper(mContext);
         db= dbHelper.getWritableDatabase();
     }
    @SuppressLint("Range")
