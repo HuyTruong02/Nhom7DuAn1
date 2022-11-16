@@ -10,6 +10,7 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "QLPT";
     private static final int DB_VERSION = 7;
     //---------------------------------
+    //duyettao
     static final String CREATE_TABLE_PHONG =
             "create table Phong (maPhong integer primary key autoincrement,"+
                     "soPhong INTERGER, moTa TEXT)";
