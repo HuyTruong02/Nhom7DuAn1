@@ -7,7 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.duan1.Model.DichVu;
-import com.example.duan1.Sqlite.DBHelper;
+import com.example.duan1.database.DBHelper;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,13 +5,13 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.duan1.Model.Phong;
-import com.example.duan1.database.DbHelper;
+import com.example.duan1.database.DBHelper;
 
 public class PhongDAO {
-    DbHelper helper;
+    DBHelper helper;
 
     public PhongDAO(Context context) {
-        helper = new DbHelper(context);
+        helper = new DBHelper(context);
     }
     public boolean insert(int soPhong, String moTa) {
         SQLiteDatabase db = helper.getReadableDatabase();

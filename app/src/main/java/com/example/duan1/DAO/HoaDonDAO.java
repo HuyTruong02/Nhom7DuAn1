@@ -7,7 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.duan1.Model.HoaDon;
-import com.example.duan1.database.DbHelper;
+import com.example.duan1.database.DBHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class HoaDonDAO {
 
 
     public HoaDonDAO(Context mContext) {
-        DbHelper dbHelper = new DbHelper(mContext);
+        DBHelper dbHelper = new DBHelper(mContext);
         db= dbHelper.getWritableDatabase();
     }
     //insert
