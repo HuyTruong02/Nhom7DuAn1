@@ -3,21 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/android/Nhom7DuAn1/app/src/main/res/drawable/add.xml" value="0.1555" />
-        <entry key="..\:/android/Nhom7DuAn1/app/src/main/res/drawable/bg_white_conor_10_border_gary.xml" value="0.1555" />
-        <entry key="..\:/android/Nhom7DuAn1/app/src/main/res/drawable/ic_baseline_24.xml" value="0.1555" />
-        <entry key="..\:/android/Nhom7DuAn1/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
-        <entry key="..\:/android/Nhom7DuAn1/app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
-        <entry key="..\:/android/Nhom7DuAn1/app/src/main/res/layout/bfgdfgdfg.xml" value="0.1" />
-        <entry key="..\:/android/Nhom7DuAn1/app/src/main/res/layout/dialog_add_dichvu.xml" value="0.1" />
-        <entry key="..\:/android/Nhom7DuAn1/app/src/main/res/layout/dialog_add_hoadon.xml" value="0.25" />
-        <entry key="..\:/android/Nhom7DuAn1/app/src/main/res/layout/dialog_bottomhdon_layout.xml" value="0.20416666666666666" />
-        <entry key="..\:/android/Nhom7DuAn1/app/src/main/res/layout/dichvu.xml" value="0.1" />
-        <entry key="..\:/android/Nhom7DuAn1/app/src/main/res/layout/duyetdz.xml" value="0.1" />
-        <entry key="..\:/android/Nhom7DuAn1/app/src/main/res/layout/fragment_hoa_don.xml" value="0.20416666666666666" />
-        <entry key="..\:/android/Nhom7DuAn1/app/src/main/res/layout/fragment_hoa_don2.xml" value="0.20416666666666666" />
-        <entry key="..\:/android/Nhom7DuAn1/app/src/main/res/layout/item_hoadon_layout.xml" value="0.20416666666666666" />
-        <entry key="..\:/android/Nhom7DuAn1/app/src/main/res/layout/truongdz.xml" value="0.1" />
+        <entry key="..\:/android/Nhom7DuAn1/app/src/main/res/layout/activity_login.xml" value="0.1" />
       </map>
     </option>
   </component>
