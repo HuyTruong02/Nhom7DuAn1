@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/bg2"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15sp"
+        android:textSize="25sp"
+        android:text="Thêm mới  phòng"
+        android:gravity="center"
+        android:background="@color/yellow"
+        android:textColor="@android:color/black"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtsophong"
+            android:layout_marginLeft="10dp"
+            android:text="Nhập số phòng"/>
+
+        <EditText
+            android:id="@+id/edsophong"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/txtsophong"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_white_conor_10_border_gary"
+            android:hint="Nhập số phòng"
+            android:paddingLeft="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/loisophong"
+            android:textColor="#FF0101"
+            android:layout_below="@+id/edsophong"
+            android:text=""/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_below="@+id/loisophong"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtmota"
+
+            android:layout_marginLeft="10dp"
+            android:text="Mô tả"/>
+
+        <EditText
+            android:id="@+id/edmota"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/txtmota"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_white_conor_10_border_gary"
+            android:hint="Mô ta"
+            android:paddingLeft="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/loimota"
+            android:layout_below="@+id/edmota"
+            android:textColor="#FF0101"
+            android:text=""/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16sp">
+
+        <Button
+            android:id="@+id/btn_add_phong"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+
+            android:layout_weight="1"
+            android:backgroundTint="@color/yellow"
+            android:text="Thêm"
+            android:textColor="@color/black"
+            app:cornerRadius="20sp" />
+        <Button
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10sp"
+            android:backgroundTint="@color/yellow"
+            app:cornerRadius="20sp"
+            android:textColor="@color/black"
+            android:id="@+id/btn_huy_phong"
+            android:text="Hủy"/>
+    </LinearLayout>
+</LinearLayout>

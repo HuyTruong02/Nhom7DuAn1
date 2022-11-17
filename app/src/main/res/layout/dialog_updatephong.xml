@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15sp"
+        android:textSize="25sp"
+        android:text="Sửa  phòng"
+        android:gravity="center"
+        android:background="@color/yellow"
+        android:textColor="@android:color/black"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtsophong"
+            android:layout_marginLeft="10dp"
+            android:text="Số phòng"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_below="@+id/txtsophong"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/tv_updatesophong"
+            android:textSize="20dp"
+
+            android:text=""/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_below="@+id/tv_updatesophong"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtmota"
+
+            android:layout_marginLeft="10dp"
+            android:text="Mô tả"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_below="@+id/txtmota"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
+            android:id="@+id/edmota"
+            android:background="@drawable/bg_white_conor_10_border_gary"
+            android:hint="Nhập mô tả"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/loimotaup"
+            android:textColor="#FF0101"
+            android:layout_below="@+id/edmota"
+            android:text=""/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16sp">
+
+        <Button
+            android:id="@+id/btn_update_phong"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+
+            android:layout_weight="1"
+            android:backgroundTint="@color/yellow"
+            android:text="Sủa"
+            android:textColor="@color/black"
+            app:cornerRadius="20sp" />
+        <Button
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10sp"
+            android:backgroundTint="@color/yellow"
+            app:cornerRadius="20sp"
+            android:textColor="@color/black"
+            android:id="@+id/btn_huyupd_phong"
+            android:text="Hủy"/>
+    </LinearLayout>
+</LinearLayout>

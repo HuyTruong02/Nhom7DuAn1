@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolBar_);
-       // setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Quản lý phòng");
