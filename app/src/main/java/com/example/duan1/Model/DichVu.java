@@ -1,7 +1,7 @@
 package com.example.duan1.Model;
 
 public class DichVu {
-    private String MaDv;
+    private int MaDv;
     private String TenDV;
     private int GiaDV;
     private String Mota;
@@ -10,18 +10,18 @@ public class DichVu {
 
     }
 
-    public DichVu(String maDv, String tenDV, int giaDV, String mota) {
+    public DichVu(int maDv, String tenDV, int giaDV, String mota) {
         MaDv = maDv;
         TenDV = tenDV;
         GiaDV = giaDV;
         Mota = mota;
     }
 
-    public String getMaDv() {
+    public int getMaDv() {
         return MaDv;
     }
 
-    public void setMaDv(String maDv) {
+    public void setMaDv(int maDv) {
         MaDv = maDv;
     }
 
@@ -49,5 +49,13 @@ public class DichVu {
         Mota = mota;
     }
 
-
+    @Override
+    public String toString() {
+        return "DichVu{" +
+                "MaDv=" + MaDv +
+                ", TenDV='" + TenDV + '\'' +
+                ", GiaDV=" + GiaDV +
+                ", Mota='" + Mota + '\'' +
+                '}';
+    }
 }

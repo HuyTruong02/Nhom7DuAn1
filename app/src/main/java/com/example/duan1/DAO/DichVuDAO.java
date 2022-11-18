@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+
 import com.example.duan1.Model.DichVu;
 import com.example.duan1.database.DBHelper;
 
@@ -19,57 +20,60 @@ public class DichVuDAO {
         DBHelper dbHelper = new DBHelper(mContext);
         db= dbHelper.getWritableDatabase();
     }
-   @SuppressLint("Range")
-   public List<DichVu>  get(String sql, String...selectArgs){
-    List<DichVu> listdv = new ArrayList<>();
-    Cursor cursor = db.rawQuery(sql, selectArgs);
-    while (cursor.moveToNext()){
-        DichVu dichVu = new DichVu();
-        dichVu.setMaDv(cursor.getString(cursor.getColumnIndex("MaDv")));
-        dichVu.setTenDV(cursor.getString(cursor.getColumnIndex("TenDv")));
-        dichVu.setMota(cursor.getString(cursor.getColumnIndex("MoTa")));
-        dichVu.setGiaDV(cursor.getInt(cursor.getColumnIndex("GiaDv")));
-
-        listdv.add(dichVu);
-
-    }
-    return listdv;
-   }
-   public List<DichVu> getAll(){
-        String sql = "SELECT * FROM DICHVU";
-
-        return get(sql);
-   }
-
-   public DichVu getById(String MaDv){
-        String sql = "SELECT * FROM DICHVU WHERE MaDv = ?";
-        List<DichVu> listdv = get(sql,MaDv);
-        return listdv.get(0);
-   }
-
-   public  long insert (DichVu dichVu){
+    //insert
+    public long insertDichVu(DichVu obj){
         ContentValues values = new ContentValues();
-        values.put("MaDv",dichVu.getMaDv());
-        values.put("TenDv",dichVu.getTenDV());
-        values.put("GiaDv",dichVu.getGiaDV());
-        values.put("MoTa",dichVu.getMota());
-
+        values.put("tenDV",obj.getTenDV());
+        values.put("giaDV",obj.getGiaDV());
+        values.put("moTa",obj.getMota());
         return db.insert("DICHVU",null,values);
-   }
+    }
 
-    public  long update (DichVu dichVu){
+    //delete by object
+    public int deleteDichVu(DichVu obj){
+        String Id = String.valueOf(obj.getMaDv());
+        return db.delete("DICHVU","maDV=?",new String[]{Id});
+    }
+
+    //update
+    public int updateDichVu(DichVu obj){
         ContentValues values = new ContentValues();
-        values.put("TenDv",dichVu.getTenDV());
-        values.put("GiaDv",dichVu.getGiaDV());
-        values.put("MoTa",dichVu.getMota());
-
-        return db.update("DICHVU",values,"MaDv=?",new String[]{dichVu.getMaDv()});
-
+        values.put("tenDV",obj.getTenDV());
+        values.put("giaDV",obj.getGiaDV());
+        values.put("moTa",obj.getMaDv());
+        String Id = String.valueOf(obj.getMaDv());
+        return db.update("DICHVU",values,"maDV=?",new String[]{Id});
     }
-    public  long delete (String MaDv){
-        return db.delete("DichVu","maDV=?",new String[]{MaDv});
+    //getAll
+    public List<DichVu> getAll(){
+        String sql="SELECT * FROM DICHVU";
+        return getData(sql);
     }
-
-
+    //get user by id
+    public DichVu getUserById(String Id){
+        String sql="SELECT * FROM DICHVU WHERE maDV=?";
+        List<DichVu> list = getData(sql,Id);
+        if(list!=null){
+            return list.get(0);
+        }
+        return null;
+    }
+    @SuppressLint("Range")
+    public List<DichVu>getData(String sql, String...SelectArgs){
+        List<DichVu> list= new ArrayList<>();
+        Cursor cursor= db.rawQuery(sql,SelectArgs);
+        while (cursor.moveToNext()){
+            DichVu user = new DichVu();
+            user.setMaDv(Integer.parseInt(cursor.getString(0)));
+            user.setTenDV(cursor.getString(1));
+            user.setGiaDV(Integer.parseInt(cursor.getString(2)));
+            user.setMota(cursor.getString(3));
+            list.add(user);
+        }
+        if(list!=null||list.size()!=0){
+            return list;
+        }
+        return null;
+    }
 
 }
