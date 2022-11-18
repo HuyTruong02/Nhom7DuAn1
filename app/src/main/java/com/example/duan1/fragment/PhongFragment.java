@@ -35,8 +35,6 @@ public class PhongFragment extends Fragment {
     TextView txtloi_sophong, txtloi_mota;
     EditText ed_soPhong;
     EditText ed_moTa;
-    EditText ed_timkiem;
-    ImageView ivbtn;
     PhongAdapter adapter;
     PhongDAO dao;
     ArrayList<Phong> list = new ArrayList<>();
@@ -59,31 +57,8 @@ public class PhongFragment extends Fragment {
         adapter = new PhongAdapter(getContext(), list);
         rec.setAdapter(adapter);
 
-        ed_timkiem = view.findViewById(R.id.edtimkiem);
-        ivbtn = view.findViewById(R.id.btntimkiem);
 
-        ivbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String timkiem = ed_timkiem.getText().toString();
-                int tk = 0;
-                if (timkiem.length() == 0) {
-                    Toast.makeText(getContext(), "Bạn đang để trống thanh tìm kiếm", Toast.LENGTH_SHORT).show();
-                }
-                if (timkiem.length() != 3) {
-                    Toast.makeText(getContext(), "Số phòng không được khác 3 chữ số", Toast.LENGTH_SHORT).show();
-                }
-                try {
 
-                    tk = Integer.parseInt(timkiem);
-                    if (tk < 0) {
-                        Toast.makeText(getContext(), "Số phòng không âm", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    Toast.makeText(getContext(), "Số phòng phải là số nguyên", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

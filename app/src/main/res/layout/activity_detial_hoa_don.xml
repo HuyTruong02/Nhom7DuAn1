@@ -41,7 +41,7 @@
                     android:id="@+id/ed_soPhong_HDon_dt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="201"
+
                     />
             </LinearLayout>
 
@@ -96,7 +96,6 @@
                     android:id="@+id/ed_TienDien_HDon_dt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="2.000.000"
                     />
             </LinearLayout>
             <LinearLayout
@@ -113,7 +112,7 @@
                     android:id="@+id/ed_TienNuoc_HDon_dt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="2.000.000"
+
                     />
             </LinearLayout>
 
@@ -132,7 +131,7 @@
                     android:id="@+id/ed_TienPhong_HDon_dt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="5.000.000"
+
                     />
             </LinearLayout>
             <LinearLayout
@@ -149,7 +148,7 @@
                     android:id="@+id/ed_ChiPhiKhac_HDon_dt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="2.000.000" />
+                     />
             </LinearLayout>
 
             <LinearLayout
@@ -167,7 +166,7 @@
                     android:id="@+id/ed_TongTien_HDon_dt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="2.000.000"
+
                     />
             </LinearLayout>
             <Button
