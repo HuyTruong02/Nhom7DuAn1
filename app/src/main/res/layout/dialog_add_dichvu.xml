@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/yellow"
+            android:background="@drawable/bogoctron_background2"
             android:gravity="center"
             android:padding="15sp"
             android:text="Thêm Dịch Vụ"
@@ -47,7 +47,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_white_conor_10_border_gary"
-                    android:hint="Nhập tên dịch vụ"
                     android:padding="20sp" />
             </LinearLayout>
 
@@ -68,7 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_white_conor_10_border_gary"
-                    android:hint="2.000.000"
+
                     android:padding="20sp" />
             </LinearLayout>
 
@@ -107,7 +106,7 @@
                     android:layout_margin="10sp"
                     android:layout_weight="1"
                     app:cornerRadius="20sp"
-                    android:backgroundTint="@color/yellow"
+                    android:backgroundTint="#24E0F8"
                     android:text="Thêm" />
 
                 <Button
@@ -116,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10sp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/yellow"
+                    android:backgroundTint="#24E0F8"
                     android:text="Hủy"
                     app:cornerRadius="20sp" />
             </LinearLayout>

@@ -7,19 +7,31 @@
     android:orientation="vertical"
     tools:context=".Activity.SplashScreen"
     android:backgroundTint="#fbfcf4">
+<ImageView
+    android:layout_width="150dp"
+    android:layout_height="100dp"
+    android:background="@drawable/logofpt"
+    android:layout_gravity="center"
+    >
 
+
+
+</ImageView>
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/new_icon_gif" />
+        android:src="@drawable/new_icon_gif"
+        android:layout_marginBottom="100dp"
+        />
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-250sp"
+        android:layout_marginTop="-320dp"
         android:text="Quản lý phòng trọ"
         android:textAlignment="center"
-        android:textColor="#A80B0B"
+        android:textColor="#936F03"
         android:textSize="30sp"
         android:textStyle="bold" />
 

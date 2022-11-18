@@ -13,7 +13,7 @@
         android:textSize="25sp"
         android:text="Chi tiết phòng"
         android:gravity="center"
-        android:background="@color/yellow"
+        android:background="@drawable/bogoctron_background2"
         android:textColor="@android:color/black"/>
     <RelativeLayout
         android:layout_width="match_parent"

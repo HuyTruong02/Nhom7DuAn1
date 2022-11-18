@@ -24,13 +24,15 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tvTenKT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Họ tên : "
-            android:layout_marginTop="20dp"
-            android:id="@+id/tvTenKT"
+            android:text="Họ tên: "
+            android:textStyle="bold"
             android:textColor="@color/black"
+            android:layout_margin="5dp"
             android:textSize="15dp"/>
+            />
 
         <TextView
             android:id="@+id/tvSoPhong"
@@ -39,6 +41,7 @@
             android:text="Số phòng: "
             android:textStyle="bold"
             android:textColor="@color/black"
+            android:layout_margin="5dp"
             android:textSize="15dp"/>
 
         <TextView
@@ -48,9 +51,8 @@
         android:text="CCCD: "
         android:textStyle="bold"
         android:textColor="@color/black"
+            android:layout_margin="5dp"
         android:textSize="15dp"/>
-
-
 
     </LinearLayout>
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="200sp"
     android:padding="20sp"
-    android:background="@drawable/phong"
+    android:background="@drawable/phongtro2"
     android:gravity="bottom">
     <TextView
         android:layout_width="wrap_content"
