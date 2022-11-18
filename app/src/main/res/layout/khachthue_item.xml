@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="10dp"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_white_conor_10_border_gary"
+        >
+        <ImageView
+            android:layout_marginTop="15dp"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:src="@drawable/user"/>
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Họ tên : "
+            android:layout_marginTop="20dp"
+            android:id="@+id/tvTenKT"
+            android:textColor="@color/black"
+            android:textSize="15dp"/>
+
+        <TextView
+            android:id="@+id/tvSoPhong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Số phòng: "
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="15dp"/>
+
+        <TextView
+        android:id="@+id/cccd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CCCD: "
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="15dp"/>
+
+
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:id="@+id/imgXoaKT"
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_delete"
+        />
+
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:id="@+id/imgUpdate"
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_update" />
+    </LinearLayout>
+
+</LinearLayout>
