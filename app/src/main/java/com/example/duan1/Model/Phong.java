@@ -4,14 +4,16 @@ public class Phong {
     private int maPhong;
     private int soPhong;
     private String moTa ;
+    private int hinhanh;
 
     public Phong() {
     }
 
-    public Phong(int maPhong, int soPhong, String moTa) {
+    public Phong(int maPhong, int soPhong, String moTa, int hinhanh) {
         this.maPhong = maPhong;
         this.soPhong = soPhong;
         this.moTa = moTa;
+        this.hinhanh = hinhanh;
     }
 
     public int getMaPhong() {
@@ -36,5 +38,13 @@ public class Phong {
 
     public void setMoTa(String moTa) {
         this.moTa = moTa;
+    }
+
+    public int getHinhanh() {
+        return hinhanh;
+    }
+
+    public void setHinhanh(int hinhanh) {
+        this.hinhanh = hinhanh;
     }
 }
