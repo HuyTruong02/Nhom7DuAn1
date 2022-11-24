@@ -1,5 +1,7 @@
 package com.example.duan1.fragment;
 
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,60 +9,81 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.duan1.DAO.HoaDonDAO;
+import com.example.duan1.Model.HoaDon;
 import com.example.duan1.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DoanhThuFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.Calendar;
+
+
 public class DoanhThuFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    ImageView img_doanh_thu_nambd,img_doanh_thu_namkt;
+    EditText ed_doanh_thu_nambd,ed_doanh_thu_namkt;
+    Button btn_xemDTN;
+    TextView doanhthu;
     public DoanhThuFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DoanhThuFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DoanhThuFragment newInstance(String param1, String param2) {
-        DoanhThuFragment fragment = new DoanhThuFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_doanh_thu, container, false);
+        View view= inflater.inflate(R.layout.fragment_doanh_thu, container, false);
+        img_doanh_thu_nambd = view.findViewById(R.id.img_doanh_thu_namdb);
+        img_doanh_thu_namkt=view.findViewById(R.id.img_doanh_thu_namKT);
+        ed_doanh_thu_nambd = view.findViewById(R.id.ed_doanh_thu_namBd);
+        ed_doanh_thu_namkt=view.findViewById(R.id.ed_doanh_thu_namKT);
+        btn_xemDTN = view.findViewById(R.id.btn_xemDTN);
+        doanhthu=view.findViewById(R.id.txtDoanhthu);
+        //----------------
+        Calendar calendar = Calendar.getInstance();//Lay time
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(calendar.DAY_OF_MONTH);
+        //-----------------------------
+        //datePicker
+        img_doanh_thu_nambd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int y, int m, int d) {
+                        ed_doanh_thu_nambd.setText(d + "/" + (m + 1) + "/" + y);
+                    }
+                }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
+        img_doanh_thu_namkt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int y, int m, int d) {
+                        ed_doanh_thu_namkt.setText(d + "/" + (m + 1) + "/" + y);
+                    }
+                }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
+        btn_xemDTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tuNgay=ed_doanh_thu_nambd.getText().toString();
+                String denNgay=ed_doanh_thu_namkt.getText().toString();
+                HoaDonDAO HDDAO= new HoaDonDAO(getActivity());
+                doanhthu.setText("Doanh thu : "+HDDAO.getDoanhThu(tuNgay,denNgay)+" VND");
+            }
+        });
+    return view;
     }
 }

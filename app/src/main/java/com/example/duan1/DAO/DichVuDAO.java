@@ -75,5 +75,18 @@ public class DichVuDAO {
         }
         return null;
     }
-
+    @SuppressLint("Range")
+    public int getTTDichVu(String sqlDichVu){
+        //sqlDichVu= "select sum(giaDV) sa doanhthudv from DICHVU where maDV";
+        List<Integer> list = new ArrayList<Integer>();
+        Cursor c = db.rawQuery(sqlDichVu,new String[]{sqlDichVu});
+        while (c.moveToNext()) {
+            try {
+                list.add(Integer.parseInt(c.getString(c.getColumnIndex("doanhthu"))));
+            } catch (Exception e) {
+                list.add(0);
+            }
+        }
+        return list.get(0);
+    }
 }

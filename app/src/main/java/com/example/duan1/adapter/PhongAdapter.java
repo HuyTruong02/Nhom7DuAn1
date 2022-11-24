@@ -32,19 +32,16 @@ import com.example.duan1.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.PhongViewHolder> implements Filterable{
+public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.PhongViewHolder> implements Filterable {
     Context context;
-    ArrayList<Phong> list;
+    List<Phong> mlist;
     private List<Phong> listPhong;
-    List<Phong> liSearch;
     PhongDAO dao;
 
     public PhongAdapter(Context context, ArrayList<Phong> list) {
         this.context = context;
-        this.list = list;
-        dao = new PhongDAO(context);
+        this.mlist = list;
         this.listPhong=list;
-        this.liSearch=list;
     }
 
     @NonNull
@@ -58,7 +55,7 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.PhongViewHol
 
     @Override
     public void onBindViewHolder(@NonNull PhongViewHolder holder, int position) {
-        Phong p = list.get(position);
+        Phong p = mlist.get(position);
         holder.tvsoPhong.setText( "Phòng"+" :  " +p.getSoPhong()+"");
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,8 +78,8 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.PhongViewHol
 
                                 if(dao.delete(p.getMaPhong())){
                                     Toast.makeText(context,"xóa thành công",Toast.LENGTH_SHORT).show();
-                                    list.clear();
-                                    list.addAll(dao.getAll());
+                                    mlist.clear();
+                                    mlist.addAll(dao.getAll());
                                     notifyDataSetChanged();
                                 }else {
                                     Toast.makeText(context,"xóa k thành công",Toast.LENGTH_SHORT).show();
@@ -161,8 +158,8 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.PhongViewHol
                     if(dao.update(p)){
                         Toast.makeText(context,"cập nhật thành công",Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
-                        list.clear();
-                        list.addAll(dao.getAll());
+                        mlist.clear();
+                        mlist.addAll(dao.getAll());
                         notifyDataSetChanged();
                     }else {
                         Toast.makeText(context,"cập nhật k thành công",Toast.LENGTH_SHORT).show();
@@ -190,7 +187,6 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.PhongViewHol
         txtsop.setText("Số phòng :" +"  "+ p.getSoPhong()+"");
         txtmota.setText("Mô tả :"  +"  "+p.getMoTa());
         hinhanh.setImageResource(p.getHinhanh());
-
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
@@ -201,38 +197,33 @@ public class PhongAdapter extends RecyclerView.Adapter<PhongAdapter.PhongViewHol
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return mlist.size();
     }
 
-
- //cash tìm kiếm searchView
     @Override
     public Filter getFilter() {
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
-                String strSearch=charSequence.toString();
-                if (strSearch.isEmpty()){
-                    liSearch=listPhong;
+                 int sop=0;
+                if (sop==0){
+                    mlist=listPhong;
                 }else {
-                    List<Phong> list= new ArrayList<>();
+                    List<Phong> list1=new ArrayList<>();
                     for (Phong phong:listPhong) {
-                        //nếu số phòng ta tìm bằng số phòng nhập vào thì hiển thị
-                        if (phong.getMoTa().toLowerCase().contains(strSearch.toLowerCase())){
-                            list.add(phong);
+                        if (sop==phong.getSoPhong()){
+                            mlist.add(phong);
                         }
                     }
-                    liSearch=list;
+                    mlist=list1;
                 }
                 FilterResults filterResults= new FilterResults();
-                filterResults.values=liSearch;
+                filterResults.values=mlist;
                 return filterResults;
             }
-
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                liSearch= (List<Phong>) filterResults.values;
-                notifyDataSetChanged();
+
             }
         };
     }

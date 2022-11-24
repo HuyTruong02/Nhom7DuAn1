@@ -95,7 +95,7 @@ public class DichVuFragment extends Fragment implements interfaceDeleteClickdist
                     Toast.makeText(context, "tên dịch vụ không được để trống", Toast.LENGTH_SHORT).show();
                     check=false;
                 }
-                if (!name.matches("[a-z,A-Z ]*")){
+                if (name.matches("[a-z,A-Z ]*")){
                     Toast.makeText(context, "tên dịch vụ không được chứa số và kí tự đặc biệt", Toast.LENGTH_SHORT).show();
                     check=false;
                 }

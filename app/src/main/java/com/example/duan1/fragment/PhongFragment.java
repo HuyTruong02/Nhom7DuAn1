@@ -35,11 +35,9 @@ import com.example.duan1.DAO.PhongDAO;
 import com.example.duan1.Model.Phong;
 import com.example.duan1.R;
 import com.example.duan1.adapter.PhongAdapter;
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PhongFragment extends Fragment {
     FloatingActionButton fab;
@@ -60,7 +58,7 @@ public class PhongFragment extends Fragment {
         // Required empty public constructor
     }
 
-    @SuppressLint("MissingInflatedId")
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,16 +79,17 @@ public class PhongFragment extends Fragment {
         adapter = new PhongAdapter(getContext(), list);
         rec.setAdapter(adapter);
         // tao dữ liệu đổ vào RecyclerView
-        list.add(new Phong(1,201,"dang sua chua",R.drawable.anhphongtro));
-        list.add(new Phong(2,202,"dang sua chua",R.drawable.anhphongtro1));
-        list.add(new Phong(3,203,"dang sua chua",R.drawable.anhphongtro2));
-        list.add(new Phong(4,204,"dang sua chua",R.drawable.anhphongtro3));
-        list.add(new Phong(5,205,"dang sua chua",R.drawable.anhphongtro4));
-        list.add(new Phong(6,206,"dang sua chua",R.drawable.anhphongtro5));
-        list.add(new Phong(7,207,"dang sua chua",R.drawable.anhphongtro6));
-        list.add(new Phong(8,208,"dang sua chua",R.drawable.anhphongtro7));
-        list.add(new Phong(9,209,"dang sua chua",R.drawable.anhphogntro8));
-        list.add(new Phong(10,210,"dang sua chua",R.drawable.anhphongtro9));
+//        list.add(new Phong(1, 201, "dang sua chua", R.drawable.anhphongtro));
+//        list.add(new Phong(2, 202, "dang sua chua", R.drawable.anhphongtro1));
+//        list.add(new Phong(3, 203, "dang sua chua", R.drawable.anhphongtro2));
+//        list.add(new Phong(4, 204, "dang sua chua", R.drawable.anhphongtro3));
+//        list.add(new Phong(5, 205, "dang sua chua", R.drawable.anhphongtro4));
+//        list.add(new Phong(6, 206, "dang sua chua", R.drawable.anhphongtro5));
+//        list.add(new Phong(7, 207, "dang sua chua", R.drawable.anhphongtro6));
+//        list.add(new Phong(8, 208, "dang sua chua", R.drawable.anhphongtro7));
+//        list.add(new Phong(9, 209, "dang sua chua", R.drawable.anhphogntro8));
+//        list.add(new Phong(10, 210, "dang sua chua", R.drawable.anhphongtro9));
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,6 +98,9 @@ public class PhongFragment extends Fragment {
         });
         return view;
     }
+
+
+
 
     private void openDialog(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -167,7 +169,7 @@ public class PhongFragment extends Fragment {
                 }
                 if (check == true) {
 
-                    if (dao.insert(soPhong, moTa, hinhanh)) {
+                    if (dao.insert(soPhong, moTa,hinhanh)) {
                         Toast.makeText(context, "thêm mới thành công", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                         list.clear();
@@ -186,6 +188,7 @@ public class PhongFragment extends Fragment {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.item_search, menu);
