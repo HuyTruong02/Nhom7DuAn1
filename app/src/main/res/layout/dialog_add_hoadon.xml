@@ -36,17 +36,28 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:gravity="start"
-                    android:text="Chọn số phòng" />
+                    android:text="Chọn số phòng"
 
-                <EditText
-                    android:id="@+id/ed_soPhong_HDon"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_white_conor_10_border_gary"
 
-                    android:padding="20sp" />
+                    />
+
+<!--                <EditText-->
+<!--                    android:id="@+id/ed_soPhong_HDon"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/bg_white_conor_10_border_gary"-->
+
+<!--                    android:padding="20sp" />-->
+          <Spinner
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="300dp"
+              android:layout_marginTop="-50dp"
+              android:id="@+id/spiner"
+
+              />
             </LinearLayout>
 
 
@@ -206,11 +217,17 @@
                 android:orientation="vertical"
                 android:padding="16sp">
 
-                <TextView
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/tongtien"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:text="Tổng tiền" />
+                    android:layout_margin="10sp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#24E0F8"
+                    android:text="Tổng chi phí"
+                    app:cornerRadius="20sp"
+                    android:layout_gravity="center"
+                    />
 
                 <EditText
                     android:id="@+id/ed_TongTien_HDon"

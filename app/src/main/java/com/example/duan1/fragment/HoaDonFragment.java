@@ -1,5 +1,6 @@
 package com.example.duan1.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -14,11 +15,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.duan1.Activity.interfaceDeleteClickdistioner;
@@ -37,14 +40,17 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
     Button btn_them_HD,btn_huy_HD;
     ImageView image_ngaybatdau,image_ngayketthuc;
     EditText edt_batdau_hd;
-    EditText edt_hethan_hd,abc;
+    EditText edt_hethan_hd;
     EditText ed_soPhong_HDon,ed_tienNuoc_HDon,ed_tienDien_HDon,ed_tienPhong_HDon,ed_chiPhiKhac_HDon,ed_tongTien_HDon;
     HoaDon hoaDon;
     HoaDonDAO hoaDonDAO;
-    private ArrayList<HoaDon> list = new ArrayList<HoaDon>();
+    ArrayList<HoaDon> list;
     HoaDonAdapter hoaDonAdapter;
     Context context;
     ListView rcv;
+    Button btntong;
+
+
 
 
     @Override
@@ -70,6 +76,7 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
         });
     }
 
+    @SuppressLint("MissingInflatedId")
     private void openDialog(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = this.getLayoutInflater();
@@ -80,15 +87,17 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
 
         image_ngaybatdau = view.findViewById(R.id.image_ngaybatdau);
         image_ngayketthuc = view.findViewById(R.id.image_ngayketthuc);
-        ed_soPhong_HDon = view.findViewById(R.id.ed_soPhong_HDon);
         ed_tienDien_HDon = view.findViewById(R.id.ed_TienDien_HDon);
         ed_tienNuoc_HDon = view.findViewById(R.id.ed_TienNuoc_HDon);
         ed_tienPhong_HDon = view.findViewById(R.id.ed_TienPhong_HDon);
         ed_tongTien_HDon = view.findViewById(R.id.ed_TongTien_HDon);
         ed_chiPhiKhac_HDon = view.findViewById(R.id.ed_ChiPhiKhac_HDon);
-
         edt_batdau_hd = view.findViewById(R.id.ed_batDau_HDon);
         edt_hethan_hd = view.findViewById(R.id.ed_ketThuc_HDon);
+        btntong = view.findViewById(R.id.tongtien);
+        hoaDonDAO = new HoaDonDAO(getContext());
+        list = new ArrayList<HoaDon>();
+        list = (ArrayList<HoaDon>) hoaDonDAO.getAll();
 
         builder.setView(view);
         Dialog dialog = builder.create();
@@ -126,15 +135,18 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
 
 
         btn_them_HD.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
+
+
                 Boolean check=true;
                 String name =ed_soPhong_HDon.getText().toString();
                 String dien =ed_tienDien_HDon.getText().toString();
                 String nuoc =ed_tienNuoc_HDon.getText().toString();
                 String phong =ed_tienPhong_HDon.getText().toString();
                 String khac =ed_chiPhiKhac_HDon.getText().toString();
-
                 if(name.length()==0){
                     ed_soPhong_HDon.requestFocus();
                     Toast.makeText(context, "số phòng không được để trống", Toast.LENGTH_SHORT).show();
@@ -242,6 +254,23 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+            }
+        });
+        btntong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String dien =ed_tienDien_HDon.getText().toString();
+                int dien1 = Integer.parseInt(dien);
+                String nuoc =ed_tienNuoc_HDon.getText().toString();
+                int nuoc1 = Integer.parseInt(nuoc);
+                String phong =ed_tienPhong_HDon.getText().toString();
+                int phong1 = Integer.parseInt(phong);
+                String khac =ed_chiPhiKhac_HDon.getText().toString();
+                int khac1 = Integer.parseInt(khac);
+                int tong = dien1+nuoc1+phong1+khac1;
+                ed_tongTien_HDon.setText(String.valueOf(tong));
+
             }
         });
 

@@ -33,6 +33,8 @@ public class HoaDonAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<HoaDon> list = new ArrayList<>();
     private com.example.duan1.Activity.interfaceDeleteClickdistioner interfaceDeleteClickdistioner;
+    int mylayout;
+
 
 
     public HoaDonAdapter(Context context, interfaceDeleteClickdistioner interfaceDeleteClickdistioner) {
@@ -67,6 +69,13 @@ public class HoaDonAdapter extends BaseAdapter {
 
 
     public View getView(int i, View view, ViewGroup viewGroup) {
+      LayoutInflater inflater2 = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+      view = inflater2.inflate(mylayout,null);
+      TextView sophong =  (TextView)view.findViewById(R.id.sophong1);
+      sophong.setText(list.get(i).getSoPhong());
+      
+
+
         MyViewHolder myViewHolder = null;
         if (view == null) {
             myViewHolder = new MyViewHolder();
