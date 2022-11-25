@@ -41,6 +41,7 @@ public class DichVuDAO {
         values.put("tenDV",obj.getTenDV());
         values.put("giaDV",obj.getGiaDV());
         values.put("moTa",obj.getMaDv());
+
         String Id = String.valueOf(obj.getMaDv());
         return db.update("DICHVU",values,"maDV=?",new String[]{Id});
     }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
@@ -33,14 +34,13 @@ public class DichVuAdapter extends BaseAdapter {
     private com.example.duan1.Activity.interfaceDeleteClickdistioner interfaceDeleteClickdistioner;
 
 
-
     public DichVuAdapter(Context context, interfaceDeleteClickdistioner interfaceDeleteClickdistioner) {
         this.context = context;
         this.interfaceDeleteClickdistioner = interfaceDeleteClickdistioner;
     }
 
-    public void setData(ArrayList<DichVu> arrayList){
-        this.list= arrayList;
+    public void setData(ArrayList<DichVu> arrayList) {
+        this.list = arrayList;
         notifyDataSetChanged();// có tác dụng refresh lại data
     }
 
@@ -51,11 +51,13 @@ public class DichVuAdapter extends BaseAdapter {
         private TextView tvgia_dv;
         private TextView tvmota_dv;
     }
+
     public int getCount() {
-        if(list!=null)
+        if (list != null)
             return list.size();
         return 0;
     }
+
     public Object getItem(int i) {
         return null;
     }
@@ -113,9 +115,8 @@ public class DichVuAdapter extends BaseAdapter {
                         EditText edtsuamota = view.findViewById(R.id.ed_update_MoTa_DV);
                         Button btnluu = view.findViewById(R.id.btn_update_luu_DV);
                         Button btnhuy = view.findViewById(R.id.btn_update_huy_DV);
-
                         edtsuaten.setText(list.get(i).getTenDV());
-                        edtsuagia.setText(list.get(i).getGiaDV());
+                        edtsuagia.setText(String.valueOf(list.get(i).getGiaDV()));
                         edtsuamota.setText(list.get(i).getMota());
 
                         builder.setView(view);
@@ -126,19 +127,19 @@ public class DichVuAdapter extends BaseAdapter {
                             @Override
                             public void onClick(View view) {
                                 DichVuDAO dichVuDAO = new DichVuDAO(context);
-                                DichVu dichVu= new DichVu();
+                                DichVu dichVu = new DichVu();
                                 dichVu = list.get(i);
                                 dichVu.setTenDV(edtsuaten.getText().toString());
                                 dichVu.setGiaDV(Integer.parseInt(edtsuagia.getText().toString()));
-                                dichVu.setMota(edtsuamota.getText().toString());
-                                if(dichVuDAO.updateDichVu(dichVu)>0){
-                                    Toast.makeText(context,"sửa thành công", Toast.LENGTH_LONG).show();
+                                dichVu.setMota (edtsuamota.getText().toString());
+                                if (dichVuDAO.updateDichVu(dichVu) > 0) {
+                                    Toast.makeText(context, "sửa thành công", Toast.LENGTH_LONG).show();
                                     dialog.dismiss();
                                     list.clear();
                                     list.addAll(dichVuDAO.getAll());
                                     notifyDataSetChanged();
-                                }else {
-                                    Toast.makeText(context,"sửa không thành công", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(context, "sửa không thành công", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });

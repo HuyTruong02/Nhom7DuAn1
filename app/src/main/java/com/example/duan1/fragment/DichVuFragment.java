@@ -8,10 +8,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
+
 import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,9 +24,11 @@ import androidx.fragment.app.Fragment;
 import com.example.duan1.Activity.interfaceDeleteClickdistioner;
 import com.example.duan1.DAO.DichVuDAO;
 import com.example.duan1.Model.DichVu;
+
 import com.example.duan1.R;
 
 import com.example.duan1.adapter.DichVuAdapter;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -30,14 +36,17 @@ import java.util.ArrayList;
 
 public class DichVuFragment extends Fragment implements interfaceDeleteClickdistioner {
 
-    EditText ed_tendichvu_dv,ed_giadichvu_dv,ed_mota_dv;
-    Button btnthem_dv,btnhuy_dv;
+    EditText ed_tendichvu_dv, ed_giadichvu_dv, ed_mota_dv;
+    Button btnthem_dv, btnhuy_dv;
     FloatingActionButton fab;
     ListView rcv_dichvu;
+    Spinner spinner;
 
     DichVuAdapter dichVuAdapter;
     private DichVuDAO dichVuDAO;
-    private ArrayList<DichVu> list = new ArrayList<>();
+
+
+    private ArrayList<DichVu> listt = new ArrayList<>();
     Context context;
 
 
@@ -46,14 +55,15 @@ public class DichVuFragment extends Fragment implements interfaceDeleteClickdist
         super.onViewCreated(view, savedInstanceState);
         fab = view.findViewById(R.id.fab_addDichVu);
         rcv_dichvu = view.findViewById(R.id.rec_DichVu);
-
+        spinner = view.findViewById(R.id.Spiner);
         context = this.getActivity();
 
         dichVuDAO = new DichVuDAO(context);
-        list = (ArrayList<DichVu>) dichVuDAO.getAll();
-        dichVuAdapter = new DichVuAdapter(context,this::OnClickDelete);
-        dichVuAdapter.setData(list);
+        listt = (ArrayList<DichVu>) dichVuDAO.getAll();
+        dichVuAdapter = new DichVuAdapter(context, this::OnClickDelete);
+        dichVuAdapter.setData(listt);
         rcv_dichvu.setAdapter(dichVuAdapter);
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +72,6 @@ public class DichVuFragment extends Fragment implements interfaceDeleteClickdist
             }
         });
     }
-
 
 
     private void openDialog(Context context) {
@@ -86,51 +95,51 @@ public class DichVuFragment extends Fragment implements interfaceDeleteClickdist
 
             @Override
             public void onClick(View view) {
-                Boolean check=true;
-                String name =ed_tendichvu_dv.getText().toString();
-                String gia =ed_giadichvu_dv.getText().toString();
+                Boolean check = true;
+                String name = ed_tendichvu_dv.getText().toString();
+                String gia = ed_giadichvu_dv.getText().toString();
 
-                if(name.length()==0){
+                if (name.length() == 0) {
                     ed_tendichvu_dv.requestFocus();
                     Toast.makeText(context, "tên dịch vụ không được để trống", Toast.LENGTH_SHORT).show();
-                    check=false;
+                    check = false;
                 }
-                if (name.matches("[a-z,A-Z ]*")){
+                if (!name.matches("[a-z,A-Z ]*")) {
                     Toast.makeText(context, "tên dịch vụ không được chứa số và kí tự đặc biệt", Toast.LENGTH_SHORT).show();
-                    check=false;
+                    check = false;
                 }
-                if(name.length()>50){
+                if (name.length() > 50) {
                     Toast.makeText(context, "tên dịch vụ không vượt quá 50 ký tự", Toast.LENGTH_SHORT).show();
-                    check=false;
+                    check = false;
                 }
                 //==---------------------------------------------=----------------------------
-                if (gia.length()==0) {
+                if (gia.length() == 0) {
                     Toast.makeText(context, "tên dịch vụ không được để trống", Toast.LENGTH_SHORT).show();
-                    check=false;
+                    check = false;
                 }
-                if(!gia.matches("[0-99999]*")){
+                if (!gia.matches("[0-99999]*")) {
                     Toast.makeText(context, "nhập sai vui lòng nhập lại từ 0 trở lên", Toast.LENGTH_SHORT).show();
-                    check=false;
+                    check = false;
                 }
 
-                if (gia.length() >8) {
+                if (gia.length() > 8) {
                     Toast.makeText(context, "giá dịch vụ không vượt quá 8 ký tự", Toast.LENGTH_SHORT).show();
-                    check=false;
+                    check = false;
                 }
 
                 //============-------------------------------------------------------------------
 
-                if(check==true){
+                if (check == true) {
                     dichVu = new DichVu();
                     dichVu.setTenDV(name);
                     dichVu.setGiaDV(Integer.parseInt(ed_giadichvu_dv.getText().toString()));
                     dichVu.setMota(ed_mota_dv.getText().toString());
                     dichVuDAO = new com.example.duan1.DAO.DichVuDAO(context);
                     dichVuDAO.insertDichVu(dichVu);
-                    Toast.makeText(context,"thêm mới thành công",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "thêm mới thành công", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
-                    list.clear();
-                    list.addAll(dichVuDAO.getAll());
+                    listt.clear();
+                    listt.addAll(dichVuDAO.getAll());
                     dichVuAdapter.notifyDataSetChanged();
                 }
 
@@ -147,34 +156,33 @@ public class DichVuFragment extends Fragment implements interfaceDeleteClickdist
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_dich_vu, container, false);
+
     }
-
-
 
 
     @Override
     public void OnClickDelete(int index) {
         deletedialog(index);
     }
-    public void deletedialog(int index){
-        androidx.appcompat.app.AlertDialog.Builder builder= new androidx.appcompat.app.AlertDialog.Builder(context);
+
+    public void deletedialog(int index) {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(context);
         builder.setTitle("bạn có chắc chắn muốn xóa không?");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(dichVuDAO.deleteDichVu(list.get(index))>0){
-                    list.remove(index);
-                    dichVuAdapter.setData(list);
-                    Toast.makeText(context,"xoa thành công",
+                if (dichVuDAO.deleteDichVu(listt.get(index)) > 0) {
+                    listt.remove(index);
+                    dichVuAdapter.setData(listt);
+                    Toast.makeText(context, "xoa thành công",
                             Toast.LENGTH_LONG).show();
-                }else {
-                    Toast.makeText(context,"xóa không thành công",
+                } else {
+                    Toast.makeText(context, "xóa không thành công",
                             Toast.LENGTH_LONG).show();
                 }
 

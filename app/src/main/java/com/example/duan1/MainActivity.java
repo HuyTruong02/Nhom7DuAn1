@@ -1,6 +1,7 @@
 package com.example.duan1;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolBar_);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Quản lý phòng");
         // Kết Thúc Xử Lí Toolbar
@@ -50,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.Draw_layout);
         navigationView = findViewById(R.id.Draw_nav);
         fragmentManager = getSupportFragmentManager();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle
+                (this, drawerLayout, toolbar, 0, 0);
+        toggle.syncState();
         fragmentManager.beginTransaction().add(R.id.fragment_main, new PhongFragment()).commit();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override

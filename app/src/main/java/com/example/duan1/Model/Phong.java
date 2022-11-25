@@ -1,12 +1,20 @@
 package com.example.duan1.Model;
 
+import android.widget.ArrayAdapter;
+import android.widget.PopupMenu;
+
+import java.util.ArrayList;
+
 public class Phong {
+    private ArrayList<Phong> phongArraylist = new ArrayList<>();
+
     private int maPhong;
     private int soPhong;
     private String moTa ;
     private int hinhanh;
 
     public Phong() {
+
     }
 
     public Phong(int maPhong, int soPhong, String moTa, int hinhanh) {
@@ -46,5 +54,10 @@ public class Phong {
 
     public void setHinhanh(int hinhanh) {
         this.hinhanh = hinhanh;
+    }
+
+    public ArrayList<Phong> getPhongArraylist() {
+
+        return phongArraylist;
     }
 }
