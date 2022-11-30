@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.duan1.Model.HoaDon;
+import com.example.duan1.Model.Phong;
 import com.example.duan1.database.DBHelper;
 
 import java.text.SimpleDateFormat;
@@ -15,8 +16,8 @@ import java.util.List;
 
 public class HoaDonDAO {
     private SQLiteDatabase db;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
+    private List<Phong> listPhong;
     public HoaDonDAO(Context mContext) {
         DBHelper dbHelper = new DBHelper(mContext);
         db= dbHelper.getWritableDatabase();
@@ -25,8 +26,8 @@ public class HoaDonDAO {
     public long insertHoaDon(HoaDon obj){
         ContentValues values = new ContentValues();
         values.put("soPhong",obj.getSoPhong());
-        values.put("ngayBatDau", sdf.format(obj.getNgayBatDau()));
-        values.put("ngayHetHan",sdf.format(obj.getNgayHetHan()));
+        values.put("ngayBatDau", String.valueOf(obj.getNgayBatDau()));
+        values.put("ngayHetHan",String.valueOf(obj.getNgayHetHan()));
         values.put("tienDien",obj.getTienDien());
         values.put("tienNuoc",obj.getTienNuoc());
         values.put("tienPhong",obj.getTienPhong());
@@ -76,7 +77,7 @@ public class HoaDonDAO {
         while (cursor.moveToNext()){
             HoaDon user= new HoaDon();
             user.setMaHoaDon(Integer.parseInt(cursor.getString(cursor.getColumnIndex("maHoaDon"))));
-            user.setSoPhong(Integer.parseInt(String.valueOf(cursor.getColumnIndex("soPhong"))));
+            user.setSoPhong(cursor.getInt(1));
             user.setNgayBatDau(cursor.getString(cursor.getColumnIndex("ngayBatDau")));
             user.setNgayHetHan(cursor.getString(cursor.getColumnIndex("ngayHetHan")));
             user.setTienDien(Integer.parseInt(String.valueOf(cursor.getColumnIndex("tienDien"))));
@@ -91,19 +92,4 @@ public class HoaDonDAO {
         }
         return null;
     }
-    @SuppressLint("Range")
-    public int getDoanhThu(String tuNgay, String denNgay){
-        String sqlDoanhthu="SELECT SUM(tongTien) AS DOANHTHU FROM HoaDon WHERE ngayBatDau BETWEEN ? AND ?";
-        List<Integer> list = new ArrayList<Integer>();
-        Cursor c=db.rawQuery(sqlDoanhthu,new String[]{tuNgay,denNgay});
-        while (c.moveToNext()){
-            try {
-                list.add(Integer.parseInt(c.getString(c.getColumnIndex("DOANHTHU"))));
-            }catch (Exception e){
-                list.add(0);
-            }
-        }
-        return list.get(0);
-    }
-
 }

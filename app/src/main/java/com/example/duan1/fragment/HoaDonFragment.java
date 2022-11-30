@@ -12,10 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -26,16 +27,23 @@ import android.widget.Toast;
 
 import com.example.duan1.Activity.interfaceDeleteClickdistioner;
 import com.example.duan1.DAO.HoaDonDAO;
+import com.example.duan1.DAO.PhongDAO;
 import com.example.duan1.Model.HoaDon;
+import com.example.duan1.Model.Phong;
+import com.example.duan1.Model.ResetData;
 import com.example.duan1.R;
 import com.example.duan1.adapter.HoaDonAdapter;
+import com.example.duan1.adapter.SpinnerAdapter;
+import com.example.duan1.database.DBHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Random;
 
 
-public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdistioner {
+public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdistioner, ResetData {
     FloatingActionButton fab;
     Button btn_them_HD,btn_huy_HD;
     ImageView image_ngaybatdau,image_ngayketthuc;
@@ -49,6 +57,16 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
     Context context;
     ListView rcv;
     Button btntong;
+    ArrayAdapter<Phong> adapter;
+    ArrayList<Phong> listphong;
+    Spinner spinner;
+    DBHelper db;
+    PhongDAO phongdao;
+
+
+
+
+
 
 
 
@@ -64,8 +82,14 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
 
         hoaDonDAO = new HoaDonDAO(context);
         list = (ArrayList<HoaDon>) hoaDonDAO.getAll();
-        hoaDonAdapter = new HoaDonAdapter(context,this::OnClickDelete);
-        hoaDonAdapter.setData(list);
+        Log.d("jdkasdjas",list.size()+"");
+      //  HoaDon hoadonnn = list.get(3);
+        for(HoaDon hd : list){
+            Log.d("đấ",hd.getSoPhong()+"" + hd.getNgayBatDau());
+        }
+
+        hoaDonAdapter = new HoaDonAdapter(context,list,this::OnClickDelete);
+        //hoaDonAdapter.setData(list);
         rcv.setAdapter(hoaDonAdapter);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +108,6 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
 
         btn_them_HD = view.findViewById(R.id.btn_them_HDon);
         btn_huy_HD = view.findViewById(R.id.btn_huy_HDon);
-
         image_ngaybatdau = view.findViewById(R.id.image_ngaybatdau);
         image_ngayketthuc = view.findViewById(R.id.image_ngayketthuc);
         ed_tienDien_HDon = view.findViewById(R.id.ed_TienDien_HDon);
@@ -94,6 +117,7 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
         ed_chiPhiKhac_HDon = view.findViewById(R.id.ed_ChiPhiKhac_HDon);
         edt_batdau_hd = view.findViewById(R.id.ed_batDau_HDon);
         edt_hethan_hd = view.findViewById(R.id.ed_ketThuc_HDon);
+        spinner = view.findViewById(R.id.spinner);
         btntong = view.findViewById(R.id.tongtien);
         hoaDonDAO = new HoaDonDAO(getContext());
         list = new ArrayList<HoaDon>();
@@ -134,6 +158,12 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
         });
 
 
+        List<Phong> listt = new ArrayList<>();
+        phongdao = new PhongDAO(context);
+        listt = phongdao.getAll();
+        Spinner spinner = view.findViewById(R.id.spinner);
+        SpinnerAdapter adapter = new SpinnerAdapter(listt,context);
+        spinner.setAdapter(adapter);
         btn_them_HD.setOnClickListener(new View.OnClickListener() {
 
 
@@ -142,27 +172,18 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
 
 
                 Boolean check=true;
-                String name =ed_soPhong_HDon.getText().toString();
+
+
+                Phong phongg = (Phong) spinner.getSelectedItem();
+                int soPHongOfHd = phongg.getSoPhong();
+
                 String dien =ed_tienDien_HDon.getText().toString();
                 String nuoc =ed_tienNuoc_HDon.getText().toString();
                 String phong =ed_tienPhong_HDon.getText().toString();
                 String khac =ed_chiPhiKhac_HDon.getText().toString();
-                if(name.length()==0){
-                    ed_soPhong_HDon.requestFocus();
-                    Toast.makeText(context, "số phòng không được để trống", Toast.LENGTH_SHORT).show();
-                    check=false;
-                }
 
-                if (!name.matches("[0-999]*")){
-                    ed_soPhong_HDon.requestFocus();
-                    Toast.makeText(context, "số phòng không để âm được,chứa chữ và kí tự đặc biệt", Toast.LENGTH_SHORT).show();
-                    check=false;
-                }
-                if(name.length()>5){
-                    ed_soPhong_HDon.requestFocus();
-                    Toast.makeText(context, "số phòng không vượt quá 3 ký tự", Toast.LENGTH_SHORT).show();
-                    check=false;
-                }
+
+
                 //==---------------------------------------------=----------------------------
                 if(dien.length()==0){
                     ed_tienDien_HDon.requestFocus();
@@ -231,7 +252,8 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
 
                 if (check=true){
                     hoaDon = new HoaDon();
-                    hoaDon.setSoPhong(Integer.parseInt(name));
+
+                    hoaDon.setSoPhong(Integer.parseInt(String.valueOf(soPHongOfHd)));
                     hoaDon.setNgayBatDau(edt_batdau_hd.getText().toString());
                     hoaDon.setNgayBatDau(edt_hethan_hd.getText().toString());
                     hoaDon.setTienDien(Integer.parseInt(dien));
@@ -239,17 +261,19 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
                     hoaDon.setTienPhong(Integer.parseInt(phong));
                     hoaDon.setChiPhiKhac(Integer.parseInt(khac));
                     hoaDon.setTongTien(Integer.parseInt(ed_tongTien_HDon.getText().toString()));
+                    Log.d("xnxx", "onClick: " + hoaDon.getSoPhong());
+                   // hoaDonDAO = new HoaDonDAO(context);
+                   long insrt =  hoaDonDAO.insertHoaDon(hoaDon);
+                   if(insrt>0) {
+                      resetShowData();
 
-                    hoaDonDAO = new HoaDonDAO(context);
-                    hoaDonDAO.insertHoaDon(hoaDon);
-                    Toast.makeText(context,"thêm mới thành công",Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                    list.clear();
-                    list.addAll(hoaDonDAO.getAll());
-                    hoaDonAdapter.notifyDataSetChanged();
+                   }
+                   dialog.dismiss();
+
                 }
             }
         });
+
         btn_huy_HD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -274,6 +298,23 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
             }
         });
 
+
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        list.clear();
+        list.addAll(hoaDonDAO.getAll());
+        hoaDonAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void resetShowData() {
+        list.clear();
+        list.addAll(hoaDonDAO.getAll());
+        hoaDonAdapter = new HoaDonAdapter(context,list,this::OnClickDelete);
+        rcv.setAdapter(hoaDonAdapter);
+        Toast.makeText(getContext(), "Them moi thanh cong", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -313,4 +354,5 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
         });
         builder.show();
     }
+
 }

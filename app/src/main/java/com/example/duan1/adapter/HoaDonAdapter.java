@@ -19,23 +19,30 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.duan1.Activity.Detail_HoaDon;
 import com.example.duan1.Activity.interfaceDeleteClickdistioner;
+import com.example.duan1.DAO.PhongDAO;
 import com.example.duan1.Model.HoaDon;
+import com.example.duan1.Model.Phong;
 import com.example.duan1.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class HoaDonAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<HoaDon> list = new ArrayList<>();
     private com.example.duan1.Activity.interfaceDeleteClickdistioner interfaceDeleteClickdistioner;
-    int mylayout;
 
-
+    public HoaDonAdapter(Context context, ArrayList<HoaDon> list, com.example.duan1.Activity.interfaceDeleteClickdistioner interfaceDeleteClickdistioner) {
+        this.context = context;
+        this.list = list;
+        this.interfaceDeleteClickdistioner = interfaceDeleteClickdistioner;
+    }
 
     public HoaDonAdapter(Context context, interfaceDeleteClickdistioner interfaceDeleteClickdistioner) {
         this.context = context;
@@ -58,23 +65,17 @@ public class HoaDonAdapter extends BaseAdapter {
         return 0;
     }
     public Object getItem(int i) {
-        return null;
+        return list.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return i;
     }
 
 
 
     public View getView(int i, View view, ViewGroup viewGroup) {
-      LayoutInflater inflater2 = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-      view = inflater2.inflate(mylayout,null);
-      TextView sophong =  (TextView)view.findViewById(R.id.sophong1);
-      sophong.setText(list.get(i).getSoPhong());
-      
-
 
         MyViewHolder myViewHolder = null;
         if (view == null) {
@@ -88,8 +89,16 @@ public class HoaDonAdapter extends BaseAdapter {
         } else {
             myViewHolder = (MyViewHolder) view.getTag();
         }
+        HoaDon hoaDon = list.get(i);
+        myViewHolder.tv_item_tenphong_dv.setText(String.valueOf(hoaDon.getSoPhong()));
+
+
+
+
+
+
+
         LinearLayout ln_item_dv = view.findViewById(R.id.ln_item_hdon);
-        myViewHolder.tv_item_tenphong_dv.setText("201");
 
         ln_item_dv.setOnClickListener(new View.OnClickListener() {
             @Override
