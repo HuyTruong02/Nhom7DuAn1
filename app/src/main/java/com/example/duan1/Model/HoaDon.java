@@ -16,9 +16,6 @@ public class HoaDon implements Serializable {
 
     public HoaDon() {
     }
-    public HoaDon(int soPhong) {
-        this.soPhong = soPhong;
-    }
 
     public HoaDon(int maHoaDon, int soPhong, String ngayBatDau, String ngayHetHan, int tienDien, int tienNuoc, int tienPhong, int chiPhiKhac, int tongTien) {
         this.maHoaDon = maHoaDon;
@@ -30,8 +27,6 @@ public class HoaDon implements Serializable {
         this.tienPhong = tienPhong;
         this.chiPhiKhac = chiPhiKhac;
         this.tongTien = tongTien;
-
-
     }
 
     public int getMaHoaDon() {

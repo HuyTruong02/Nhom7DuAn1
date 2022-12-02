@@ -24,13 +24,17 @@ import android.widget.TextView;
 
 import com.example.duan1.Activity.Detail_HoaDon;
 import com.example.duan1.Activity.interfaceDeleteClickdistioner;
+import com.example.duan1.DAO.HoaDonDAO;
 import com.example.duan1.DAO.PhongDAO;
 import com.example.duan1.Model.HoaDon;
 import com.example.duan1.Model.Phong;
 import com.example.duan1.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class HoaDonAdapter extends BaseAdapter {
@@ -124,12 +128,14 @@ public class HoaDonAdapter extends BaseAdapter {
                         LayoutInflater inflater = ((Activity) context).getLayoutInflater();
                         View view = inflater.inflate(R.layout.dialog_update_hoadon, null);
 
-                        Button btn_them_HD = view.findViewById(R.id.btn_them_HDons);
+
+                        Button btn_sua_HD = view.findViewById(R.id.btn_them_HDons);
                         Button btn_huy_HD = view.findViewById(R.id.btn_huy_HDons);
 
                         ImageView image_ngaybatdau = view.findViewById(R.id.image_ngaybatdaus);
                         ImageView image_ngayketthuc = view.findViewById(R.id.image_ngayketthucs);
-                        EditText ed_soPhong_HDon = view.findViewById(R.id.ed_soPhong_HDons);
+                        Button buttontongtien = view.findViewById(R.id.tongtiens);
+                        Spinner spinner = view.findViewById(R.id.spinnerupdate);
                         EditText ed_tienDien_HDon = view.findViewById(R.id.ed_TienDien_HDons);
                         EditText ed_tienNuoc_HDon = view.findViewById(R.id.ed_TienNuoc_HDons);
                         EditText ed_tienPhong_HDon = view.findViewById(R.id.ed_TienPhong_HDons);
@@ -137,6 +143,50 @@ public class HoaDonAdapter extends BaseAdapter {
                         EditText ed_chiPhiKhac_HDon = view.findViewById(R.id.ed_ChiPhiKhac_HDons);
                         EditText edt_batdau_hd = view.findViewById(R.id.ed_batDau_HDons);
                         EditText edt_hethan_hd = view.findViewById(R.id.ed_ketThuc_HDons);
+                        Phong phong = new Phong();
+                        PhongDAO phongDAO = new PhongDAO(context);
+                        phongDAO.open();
+                        ArrayList<Phong> listt= phongDAO.getAll();
+                        SpinnerAdapter spinnerAdapter = new SpinnerAdapter(listt);
+                        spinner.setAdapter(spinnerAdapter);
+                        spinner.setSelection(phong.getSoPhong());
+
+
+
+                        edt_batdau_hd.setText(hoaDon.getNgayHetHan());
+                        edt_hethan_hd.setText(hoaDon.getNgayBatDau());
+
+
+
+
+
+
+
+                        buttontongtien.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                String dien =ed_tienDien_HDon.getText().toString();
+                                int dien1 = Integer.parseInt(dien);
+                                String nuoc =ed_tienNuoc_HDon.getText().toString();
+                                int nuoc1 = Integer.parseInt(nuoc);
+                                String phong =ed_tienPhong_HDon.getText().toString();
+                                int phong1 = Integer.parseInt(phong);
+                                String khac =ed_chiPhiKhac_HDon.getText().toString();
+                                int khac1 = Integer.parseInt(khac);
+                                int tong = (dien1*4000)+(nuoc1*3000)+phong1+khac1;
+                                ed_tongTien_HDon.setText(String.valueOf(tong));
+
+                            }
+                        });
+                        btn_sua_HD.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        });
+
+
 
 
                         Calendar calendar = Calendar.getInstance();//Lay time
@@ -149,6 +199,7 @@ public class HoaDonAdapter extends BaseAdapter {
                                 DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                                     @Override
                                     public void onDateSet(DatePicker view, int y, int m, int d) {
+                                        GregorianCalendar gregorianCalendar =new GregorianCalendar(y,m,d);
                                         edt_batdau_hd.setText(d + "/" + (m + 1) + "/" + y);
                                     }
                                 }, year, month, day);
@@ -173,12 +224,7 @@ public class HoaDonAdapter extends BaseAdapter {
                         Dialog dialog = builder.create();
                         dialog.show();
 
-                        btn_them_HD.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
 
-                            }
-                        });
 
                         btn_huy_HD.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -207,4 +253,5 @@ public class HoaDonAdapter extends BaseAdapter {
         });
         return view;
     }
+
 }

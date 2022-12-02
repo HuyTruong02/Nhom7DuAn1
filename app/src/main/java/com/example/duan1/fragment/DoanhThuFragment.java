@@ -81,9 +81,12 @@ public class DoanhThuFragment extends Fragment {
                 String tuNgay=ed_doanh_thu_nambd.getText().toString();
                 String denNgay=ed_doanh_thu_namkt.getText().toString();
                 HoaDonDAO HDDAO= new HoaDonDAO(getActivity());
+               doanhthu.setText("Doanh thu:"+HDDAO.getDanhThu(tuNgay,denNgay)+"VND");
+
 
             }
         });
+
     return view;
     }
 }

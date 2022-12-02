@@ -17,6 +17,9 @@ import java.util.List;
 public class SpinnerAdapter extends BaseAdapter {
     List<Phong> list;
     Context context;
+    public SpinnerAdapter(List<Phong> list) {
+        this.list = list;
+    }
 
     public SpinnerAdapter(List<Phong> list, Context context) {
         this.list = list;

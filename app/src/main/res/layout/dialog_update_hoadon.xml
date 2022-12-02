@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -16,9 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bogoctron_background2"
+
             android:gravity="center"
             android:padding="15sp"
-            android:text="Sửa hóa đơn"
+            android:text="Sửa Hóa Đơn"
             android:textColor="@android:color/black"
             android:textSize="25sp"/>
 
@@ -27,28 +29,30 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="16sp">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
                     android:gravity="start"
-                    android:text="Số phòng" />
+                    android:text="Chọn số phòng"
 
-                <EditText
-                    android:id="@+id/ed_soPhong_HDons"
+                    />
+                <Spinner
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_white_conor_10_border_gary"
+                    android:layout_height="match_parent"
+                    android:id="@+id/spinnerupdate"
 
-                    android:padding="20sp" />
+                    />
+
+
             </LinearLayout>
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -126,7 +130,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:text="Tiền điện" />
+                    android:text="Số điện(4000đ/số)" />
 
                 <EditText
                     android:id="@+id/ed_TienDien_HDons"
@@ -147,14 +151,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:text="Tiền nước" />
+                    android:text="Số nước(3000đ/khối)" />
 
                 <EditText
                     android:id="@+id/ed_TienNuoc_HDons"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_white_conor_10_border_gary"
-
                     android:padding="20sp" />
             </LinearLayout>
 
@@ -206,18 +209,23 @@
                 android:orientation="vertical"
                 android:padding="16sp">
 
-                <TextView
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/tongtiens"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:text="Tổng tiền" />
+                    android:layout_margin="10sp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#24E0F8"
+                    android:text="Tổng chi phí"
+                    app:cornerRadius="20sp"
+                    android:layout_gravity="center"
+                    />
 
                 <EditText
                     android:id="@+id/ed_TongTien_HDons"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_white_conor_10_border_gary"
-                    android:hint="2.000.000"
                     android:padding="20sp" />
             </LinearLayout>
 
@@ -231,23 +239,21 @@
                     android:id="@+id/btn_them_HDons"
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10sp"
                     android:layout_weight="1"
                     android:backgroundTint="#24E0F8"
-                    android:text="Thêm"
-                    android:textColor="@color/black"
                     app:cornerRadius="20sp"
-                    android:layout_marginRight="20dp" />
+                    android:text="Sửa" />
 
                 <Button
                     android:id="@+id/btn_huy_HDons"
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10sp"
                     android:layout_weight="1"
                     android:backgroundTint="#24E0F8"
                     android:text="Hủy"
-                    android:textColor="@color/black"
-                    app:cornerRadius="20sp"
-                    android:layout_marginLeft="20dp"/>
+                    app:cornerRadius="20sp"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

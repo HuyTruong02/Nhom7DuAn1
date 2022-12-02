@@ -79,16 +79,6 @@ public class PhongFragment extends Fragment {
         adapter = new PhongAdapter(getContext(), list);
         rec.setAdapter(adapter);
         // tao dữ liệu đổ vào RecyclerView
-        list.add(new Phong(1, 201, "dang sua chua", R.drawable.anhphongtro));
-        list.add(new Phong(2, 202, "dang sua chua", R.drawable.anhphongtro1));
-        list.add(new Phong(3, 203, "dang sua chua", R.drawable.anhphongtro2));
-        list.add(new Phong(4, 204, "dang sua chua", R.drawable.anhphongtro3));
-        list.add(new Phong(5, 205, "dang sua chua", R.drawable.anhphongtro4));
-        list.add(new Phong(6, 206, "dang sua chua", R.drawable.anhphongtro5));
-        list.add(new Phong(7, 207, "dang sua chua", R.drawable.anhphongtro6));
-        list.add(new Phong(8, 208, "dang sua chua", R.drawable.anhphongtro7));
-        list.add(new Phong(9, 209, "dang sua chua", R.drawable.anhphogntro8));
-        list.add(new Phong(10, 210, "dang sua chua", R.drawable.anhphongtro9));
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

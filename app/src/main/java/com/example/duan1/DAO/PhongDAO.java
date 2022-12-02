@@ -14,6 +14,10 @@ import java.util.ArrayList;
 
 public class PhongDAO {
     DBHelper helper;
+    SQLiteDatabase db;
+    public void open(){
+        db = helper.getWritableDatabase();
+    }
 
     public PhongDAO(Context context) {
         helper = new DBHelper(context);

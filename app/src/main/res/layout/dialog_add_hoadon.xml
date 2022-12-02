@@ -130,7 +130,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:text="Tiền điện" />
+                    android:text="Số điện(4000đ/số)" />
 
                 <EditText
                     android:id="@+id/ed_TienDien_HDon"
@@ -151,7 +151,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:text="Tiền nước" />
+                    android:text="Số nước(3000đ/khối)" />
 
                 <EditText
                     android:id="@+id/ed_TienNuoc_HDon"

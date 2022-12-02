@@ -49,7 +49,7 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
     ImageView image_ngaybatdau,image_ngayketthuc;
     EditText edt_batdau_hd;
     EditText edt_hethan_hd;
-    EditText ed_soPhong_HDon,ed_tienNuoc_HDon,ed_tienDien_HDon,ed_tienPhong_HDon,ed_chiPhiKhac_HDon,ed_tongTien_HDon;
+    EditText ed_tienNuoc_HDon,ed_tienDien_HDon,ed_tienPhong_HDon,ed_chiPhiKhac_HDon,ed_tongTien_HDon;
     HoaDon hoaDon;
     HoaDonDAO hoaDonDAO;
     ArrayList<HoaDon> list;
@@ -82,14 +82,12 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
 
         hoaDonDAO = new HoaDonDAO(context);
         list = (ArrayList<HoaDon>) hoaDonDAO.getAll();
-        Log.d("jdkasdjas",list.size()+"");
-      //  HoaDon hoadonnn = list.get(3);
-        for(HoaDon hd : list){
-            Log.d("đấ",hd.getSoPhong()+"" + hd.getNgayBatDau());
-        }
+
+
+
 
         hoaDonAdapter = new HoaDonAdapter(context,list,this::OnClickDelete);
-        //hoaDonAdapter.setData(list);
+
         rcv.setAdapter(hoaDonAdapter);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -171,7 +169,7 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
             public void onClick(View view) {
 
 
-                Boolean check=true;
+
 
 
                 Phong phongg = (Phong) spinner.getSelectedItem();
@@ -182,76 +180,75 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
                 String phong =ed_tienPhong_HDon.getText().toString();
                 String khac =ed_chiPhiKhac_HDon.getText().toString();
 
-
-
                 //==---------------------------------------------=----------------------------
+                Boolean check = true;
                 if(dien.length()==0){
-                    ed_tienDien_HDon.requestFocus();
+
                     Toast.makeText(context, "tiền điện không được để trống", Toast.LENGTH_SHORT).show();
                     check=false;
                 }
                 if (!dien.matches("[0-999999999999]*")){
-                    ed_tienDien_HDon.requestFocus();
+
                     Toast.makeText(context, "tiền điện không âm ,không chứa chữ và kí tự đặc biệt", Toast.LENGTH_SHORT).show();
                     check=false;
                 }
                 if(dien.length()>10){
-                    ed_tienDien_HDon.requestFocus();
+//                    ed_tienDien_HDon.requestFocus();
                     Toast.makeText(context, "tiền điện không vượt quá 10 ký tự", Toast.LENGTH_SHORT).show();
                     check=false;
                 }
                 //==---------------------------------------------=----------------------------
                 if(nuoc.length()==0){
-                    ed_tienNuoc_HDon.requestFocus();
+
                     Toast.makeText(context, "tiền nước không được để trống", Toast.LENGTH_SHORT).show();
                     check=false;
                 }
                 if (!nuoc.matches("[0-9999999999]*")){
-                    ed_tienNuoc_HDon.requestFocus();
+
                     Toast.makeText(context, "tiền nước không âm ,không chứa chữ và kí tự đặc biệt", Toast.LENGTH_SHORT).show();
                     check=false;
                 }
                 if(nuoc.length()>10){
-                    ed_tienNuoc_HDon.requestFocus();
+
                     Toast.makeText(context, "tiền nước không vượt quá 10 ký tự", Toast.LENGTH_SHORT).show();
                     check=false;
                 }
                 //==---------------------------------------------=----------------------------
                 if(phong.length()==0){
-                    ed_tienPhong_HDon.requestFocus();
+
                     Toast.makeText(context, "tiền phòng không được để trống", Toast.LENGTH_SHORT).show();
                     check=false;
                 }
                 if (!phong.matches("[0-9999999999]*")){
-                    ed_tienPhong_HDon.requestFocus();
+
                     Toast.makeText(context, "tiền phòng không âm ,không chứa chữ và kí tự đặc biệt", Toast.LENGTH_SHORT).show();
                     check=false;
                 }
                 if(phong.length()>10){
-                    ed_tienPhong_HDon.requestFocus();
+
                     Toast.makeText(context, "tiền phòng không vượt quá 10 ký tự", Toast.LENGTH_SHORT).show();
                     check=false;
                 }
                 //==---------------------------------------------=----------------------------
                 if(khac.length()==0){
-                    ed_chiPhiKhac_HDon.requestFocus();
+
                     Toast.makeText(context, "chi phí khác không được để trống", Toast.LENGTH_SHORT).show();
                     check=false;
                 }
                 if (!khac.matches("[0-9999999999]*")){
-                    ed_chiPhiKhac_HDon.requestFocus();
+
                     Toast.makeText(context, "chi phí khác không âm ,không chứa chữ và kí tự đặc biệt", Toast.LENGTH_SHORT).show();
                     check=false;
                 }
                 if(khac.length()>10){
-                    ed_chiPhiKhac_HDon.requestFocus();
+
                     Toast.makeText(context, "chi phí khác không vượt quá 10 ký tự", Toast.LENGTH_SHORT).show();
                     check=false;
                 }
 
 
                 if (check=true){
-                    hoaDon = new HoaDon();
+
 
                     hoaDon.setSoPhong(Integer.parseInt(String.valueOf(soPHongOfHd)));
                     hoaDon.setNgayBatDau(edt_batdau_hd.getText().toString());
@@ -261,8 +258,7 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
                     hoaDon.setTienPhong(Integer.parseInt(phong));
                     hoaDon.setChiPhiKhac(Integer.parseInt(khac));
                     hoaDon.setTongTien(Integer.parseInt(ed_tongTien_HDon.getText().toString()));
-                    Log.d("xnxx", "onClick: " + hoaDon.getSoPhong());
-                   // hoaDonDAO = new HoaDonDAO(context);
+
                    long insrt =  hoaDonDAO.insertHoaDon(hoaDon);
                    if(insrt>0) {
                       resetShowData();
@@ -292,7 +288,7 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
                 int phong1 = Integer.parseInt(phong);
                 String khac =ed_chiPhiKhac_HDon.getText().toString();
                 int khac1 = Integer.parseInt(khac);
-                int tong = dien1+nuoc1+phong1+khac1;
+                int tong = (dien1*4000)+(nuoc1*3000)+phong1+khac1;
                 ed_tongTien_HDon.setText(String.valueOf(tong));
 
             }
