@@ -151,10 +151,19 @@ public class HoaDonAdapter extends BaseAdapter {
                         spinner.setAdapter(spinnerAdapter);
                         spinner.setSelection(phong.getSoPhong());
 
+                        HoaDon hoaDon = list.get(i);
+                        edt_batdau_hd.setText(hoaDon.getNgayBatDau());
+                        edt_hethan_hd.setText(hoaDon.getNgayHetHan());
+                        ed_tienDien_HDon.setText(list.get(i).getTienDien());
 
 
-                        edt_batdau_hd.setText(hoaDon.getNgayHetHan());
-                        edt_hethan_hd.setText(hoaDon.getNgayBatDau());
+
+
+//
+//                        ed_tienNuoc_HDon.setText(hoaDon.getTienNuoc());
+//                        ed_tienPhong_HDon.setText(hoaDon.getTienPhong());
+//                        ed_chiPhiKhac_HDon.setText(hoaDon.getChiPhiKhac());
+//                        ed_tongTien_HDon.setText(hoaDon.getTongTien());
 
 
 

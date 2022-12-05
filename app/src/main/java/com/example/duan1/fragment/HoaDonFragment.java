@@ -165,109 +165,72 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
         btn_them_HD.setOnClickListener(new View.OnClickListener() {
 
 
+            @SuppressLint("SuspiciousIndentation")
             @Override
             public void onClick(View view) {
-
-
 
 
 
                 Phong phongg = (Phong) spinner.getSelectedItem();
                 int soPHongOfHd = phongg.getSoPhong();
 
-                String dien =ed_tienDien_HDon.getText().toString();
-                String nuoc =ed_tienNuoc_HDon.getText().toString();
-                String phong =ed_tienPhong_HDon.getText().toString();
-                String khac =ed_chiPhiKhac_HDon.getText().toString();
-
-                //==---------------------------------------------=----------------------------
-                Boolean check = true;
-                if(dien.length()==0){
-
-                    Toast.makeText(context, "tiền điện không được để trống", Toast.LENGTH_SHORT).show();
-                    check=false;
-                }
-                if (!dien.matches("[0-999999999999]*")){
-
-                    Toast.makeText(context, "tiền điện không âm ,không chứa chữ và kí tự đặc biệt", Toast.LENGTH_SHORT).show();
-                    check=false;
-                }
-                if(dien.length()>10){
-//                    ed_tienDien_HDon.requestFocus();
-                    Toast.makeText(context, "tiền điện không vượt quá 10 ký tự", Toast.LENGTH_SHORT).show();
-                    check=false;
-                }
-                //==---------------------------------------------=----------------------------
-                if(nuoc.length()==0){
-
-                    Toast.makeText(context, "tiền nước không được để trống", Toast.LENGTH_SHORT).show();
-                    check=false;
-                }
-                if (!nuoc.matches("[0-9999999999]*")){
-
-                    Toast.makeText(context, "tiền nước không âm ,không chứa chữ và kí tự đặc biệt", Toast.LENGTH_SHORT).show();
-                    check=false;
-                }
-                if(nuoc.length()>10){
-
-                    Toast.makeText(context, "tiền nước không vượt quá 10 ký tự", Toast.LENGTH_SHORT).show();
-                    check=false;
-                }
-                //==---------------------------------------------=----------------------------
-                if(phong.length()==0){
-
-                    Toast.makeText(context, "tiền phòng không được để trống", Toast.LENGTH_SHORT).show();
-                    check=false;
-                }
-                if (!phong.matches("[0-9999999999]*")){
-
-                    Toast.makeText(context, "tiền phòng không âm ,không chứa chữ và kí tự đặc biệt", Toast.LENGTH_SHORT).show();
-                    check=false;
-                }
-                if(phong.length()>10){
-
-                    Toast.makeText(context, "tiền phòng không vượt quá 10 ký tự", Toast.LENGTH_SHORT).show();
-                    check=false;
-                }
-                //==---------------------------------------------=----------------------------
-                if(khac.length()==0){
-
-                    Toast.makeText(context, "chi phí khác không được để trống", Toast.LENGTH_SHORT).show();
-                    check=false;
-                }
-                if (!khac.matches("[0-9999999999]*")){
-
-                    Toast.makeText(context, "chi phí khác không âm ,không chứa chữ và kí tự đặc biệt", Toast.LENGTH_SHORT).show();
-                    check=false;
-                }
-                if(khac.length()>10){
-
-                    Toast.makeText(context, "chi phí khác không vượt quá 10 ký tự", Toast.LENGTH_SHORT).show();
-                    check=false;
-                }
+                String dien = ed_tienDien_HDon.getText().toString();
+                String nuoc = ed_tienNuoc_HDon.getText().toString();
+                String phong = ed_tienPhong_HDon.getText().toString();
+                String khac = ed_chiPhiKhac_HDon.getText().toString();
 
 
-                if (check=true){
+                if(ed_tienDien_HDon.getText().toString().equals("")){
+                    ed_tienDien_HDon.setError("Không được để trống");
+                    return;
+                }else ed_tienDien_HDon.setError("");
 
 
+                if(ed_tienNuoc_HDon.getText().toString().equals("")){
+                    ed_tienNuoc_HDon.setError("Không được để trống");
+                    return;
+                }else ed_tienNuoc_HDon.setError("");
+
+
+                if(ed_tienPhong_HDon.getText().toString().equals("")){
+                    ed_tienPhong_HDon.setError("Không được để trống");
+                    return;
+                }else ed_tienPhong_HDon.setError("");
+
+
+                if(ed_chiPhiKhac_HDon.getText().toString().equals("")){
+                    ed_chiPhiKhac_HDon.setError("Không được để trống");
+                    return;
+                }else ed_chiPhiKhac_HDon.setError("");
+
+
+
+                    hoaDon = new HoaDon();
                     hoaDon.setSoPhong(Integer.parseInt(String.valueOf(soPHongOfHd)));
                     hoaDon.setNgayBatDau(edt_batdau_hd.getText().toString());
-                    hoaDon.setNgayBatDau(edt_hethan_hd.getText().toString());
+                    hoaDon.setNgayHetHan(edt_hethan_hd.getText().toString());
                     hoaDon.setTienDien(Integer.parseInt(dien));
                     hoaDon.setTienNuoc(Integer.parseInt(nuoc));
                     hoaDon.setTienPhong(Integer.parseInt(phong));
                     hoaDon.setChiPhiKhac(Integer.parseInt(khac));
                     hoaDon.setTongTien(Integer.parseInt(ed_tongTien_HDon.getText().toString()));
 
-                   long insrt =  hoaDonDAO.insertHoaDon(hoaDon);
-                   if(insrt>0) {
-                      resetShowData();
+                    long insrt = hoaDonDAO.insertHoaDon(hoaDon);
+                    if (insrt > 0) {
+                        resetShowData();
+                    }
+                    dialog.dismiss();
 
-                   }
-                   dialog.dismiss();
-
-                }
             }
+
+
+
+
+
+
+
+
+
         });
 
         btn_huy_HD.setOnClickListener(new View.OnClickListener() {

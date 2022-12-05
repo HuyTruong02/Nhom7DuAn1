@@ -2,22 +2,53 @@ package com.example.duan1.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.example.duan1.DAO.HoaDonDAO;
+import com.example.duan1.DAO.PhongDAO;
 import com.example.duan1.MainActivity;
+import com.example.duan1.Model.HoaDon;
+import com.example.duan1.Model.Phong;
 import com.example.duan1.R;
+import com.example.duan1.adapter.SpinnerAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Detail_HoaDon extends AppCompatActivity {
+
+
+    EditText ed_phong,ed_ngaybd,ed_ngaykt,edtienphong,edtiennuoc,edtiendien,edchiphikhac,edtongtien;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detial_hoa_don);
-        Button btnquaylai = findViewById(R.id.btn_quayLai_detail);
 
+        ed_ngaybd = findViewById(R.id.ed_batDau_HDon_dt);
+        edtongtien = findViewById(R.id.ed_TongTien_HDon_dt);
+        edchiphikhac = findViewById(R.id.ed_ChiPhiKhac_HDon_dt);
+        ed_phong = findViewById(R.id.ed_soPhong_HDon_dt);
+        ed_ngaykt = findViewById(R.id.ed_ketThuc_HDon_dt);
+        edtiendien = findViewById(R.id.ed_TienDien_HDon_dt);
+        edtiennuoc = findViewById(R.id.ed_TienNuoc_HDon_dt);
+        edtienphong = findViewById(R.id.ed_TienPhong_HDon_dt);
+
+
+        Button btnquaylai = findViewById(R.id.btn_quayLai_detail);
         btnquaylai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
