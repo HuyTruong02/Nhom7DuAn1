@@ -19,6 +19,7 @@ public class SpinnerAdapter extends BaseAdapter {
     Context context;
     public SpinnerAdapter(List<Phong> list) {
         this.list = list;
+
     }
 
     public SpinnerAdapter(List<Phong> list, Context context) {
@@ -58,6 +59,7 @@ public class SpinnerAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
 
         Phong phong = list.get(position);
+
         viewHolder.txtphong.setText(String.valueOf(phong.getSoPhong()));
 
 

@@ -16,13 +16,15 @@ import java.util.List;
 
 public class HoaDonDAO {
     private SQLiteDatabase db;
+    DBHelper dbHelper;
 
 
     private List<Phong> listPhong;
     public HoaDonDAO(Context mContext) {
-        DBHelper dbHelper = new DBHelper(mContext);
+        dbHelper = new DBHelper(mContext);
         db= dbHelper.getWritableDatabase();
     }
+
 
     //insert
     public long insertHoaDon(HoaDon obj){
@@ -44,7 +46,7 @@ public class HoaDonDAO {
         return db.delete("HoaDon","maHoaDon=?",new String[]{Id});
     }
     //update
-    public int updateHoaDon(HoaDon obj){
+    public boolean updateHoaDon(HoaDon obj){
         ContentValues values = new ContentValues();
         values.put("soPhong",obj.getSoPhong());
         values.put("ngayBatDau", String.valueOf(obj.getNgayBatDau()));
@@ -54,8 +56,9 @@ public class HoaDonDAO {
         values.put("tienPhong",obj.getTienPhong());
         values.put("chiPhiKhac",obj.getChiPhiKhac());
         values.put("tongTien",obj.getTongTien());
-        String Id = String.valueOf(obj.getMaHoaDon());
-        return db.update("HoaDon",values,"maHoaDon=?",new String[]{Id});
+
+        int row = db.update("HoaDon", values, " maHoaDon=?", new String[]{obj.getMaHoaDon() + ""});
+        return (row > 0);
     }
     //getAll
     public List<HoaDon> getAll(){

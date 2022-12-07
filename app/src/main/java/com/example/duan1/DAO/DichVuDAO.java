@@ -18,52 +18,56 @@ public class DichVuDAO {
 
     public DichVuDAO(Context mContext) {
         DBHelper dbHelper = new DBHelper(mContext);
-        db= dbHelper.getWritableDatabase();
+        db = dbHelper.getWritableDatabase();
     }
+
     //insert
-    public long insertDichVu(DichVu obj){
+    public long insertDichVu(DichVu obj) {
         ContentValues values = new ContentValues();
-        values.put("tenDV",obj.getTenDV());
-        values.put("giaDV",obj.getGiaDV());
-        values.put("moTa",obj.getMota());
-        return db.insert("DICHVU",null,values);
+        values.put("tenDV", obj.getTenDV());
+        values.put("giaDV", obj.getGiaDV());
+        values.put("moTa", obj.getMota());
+        return db.insert("DICHVU", null, values);
     }
 
     //delete by object
-    public int deleteDichVu(DichVu obj){
+    public int deleteDichVu(DichVu obj) {
         String Id = String.valueOf(obj.getMaDv());
-        return db.delete("DICHVU","maDV=?",new String[]{Id});
+        return db.delete("DICHVU", "maDV=?", new String[]{Id});
     }
 
     //update
-    public int updateDichVu(DichVu obj){
+    public int updateDichVu(DichVu obj) {
         ContentValues values = new ContentValues();
-        values.put("tenDV",obj.getTenDV());
-        values.put("giaDV",obj.getGiaDV());
-        values.put("moTa",obj.getMaDv());
+        values.put("tenDV", obj.getTenDV());
+        values.put("giaDV", obj.getGiaDV());
+        values.put("moTa", obj.getMaDv());
 
         String Id = String.valueOf(obj.getMaDv());
-        return db.update("DICHVU",values,"maDV=?",new String[]{Id});
+        return db.update("DICHVU", values, "maDV=?", new String[]{Id});
     }
+
     //getAll
-    public List<DichVu> getAll(){
-        String sql="SELECT * FROM DICHVU";
+    public List<DichVu> getAll() {
+        String sql = "SELECT * FROM DICHVU";
         return getData(sql);
     }
+
     //get user by id
-    public DichVu getUserById(String Id){
-        String sql="SELECT * FROM DICHVU WHERE maDV=?";
-        List<DichVu> list = getData(sql,Id);
-        if(list!=null){
+    public DichVu getUserById(String Id) {
+        String sql = "SELECT * FROM DICHVU WHERE maDV=?";
+        List<DichVu> list = getData(sql, Id);
+        if (list != null) {
             return list.get(0);
         }
         return null;
     }
+
     @SuppressLint("Range")
-    public List<DichVu>getData(String sql, String...SelectArgs){
-        List<DichVu> list= new ArrayList<>();
-        Cursor cursor= db.rawQuery(sql,SelectArgs);
-        while (cursor.moveToNext()){
+    public List<DichVu> getData(String sql, String... SelectArgs) {
+        List<DichVu> list = new ArrayList<>();
+        Cursor cursor = db.rawQuery(sql, SelectArgs);
+        while (cursor.moveToNext()) {
             DichVu user = new DichVu();
             user.setMaDv(Integer.parseInt(cursor.getString(0)));
             user.setTenDV(cursor.getString(1));
@@ -71,14 +75,15 @@ public class DichVuDAO {
             user.setMota(cursor.getString(3));
             list.add(user);
         }
-        if(list!=null||list.size()!=0){
+        if (list != null || list.size() != 0) {
             return list;
         }
         return null;
     }
+
     @SuppressLint("Range")
     public int getTTDichVu(String sqlDichVu){
-        //sqlDichVu= "select sum(giaDV) sa doanhthudv from DICHVU where maDV";
+        sqlDichVu= "select sum(giaDV) as doanhthudv from DICHVU where maDV";
         List<Integer> list = new ArrayList<Integer>();
         Cursor c = db.rawQuery(sqlDichVu,new String[]{sqlDichVu});
         while (c.moveToNext()) {

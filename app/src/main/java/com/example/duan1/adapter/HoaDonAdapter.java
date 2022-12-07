@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.duan1.Activity.Detail_HoaDon;
 import com.example.duan1.Activity.interfaceDeleteClickdistioner;
@@ -41,6 +43,9 @@ public class HoaDonAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<HoaDon> list = new ArrayList<>();
     private com.example.duan1.Activity.interfaceDeleteClickdistioner interfaceDeleteClickdistioner;
+    HoaDonDAO dao;
+    List<HoaDon> listhd;
+
 
     public HoaDonAdapter(Context context, ArrayList<HoaDon> list, com.example.duan1.Activity.interfaceDeleteClickdistioner interfaceDeleteClickdistioner) {
         this.context = context;
@@ -77,7 +82,7 @@ public class HoaDonAdapter extends BaseAdapter {
         return i;
     }
 
-
+    public static int sophong;
 
     public View getView(int i, View view, ViewGroup viewGroup) {
 
@@ -94,6 +99,7 @@ public class HoaDonAdapter extends BaseAdapter {
             myViewHolder = (MyViewHolder) view.getTag();
         }
         HoaDon hoaDon = list.get(i);
+        sophong = hoaDon.getSoPhong();
         myViewHolder.tv_item_tenphong_dv.setText(String.valueOf(hoaDon.getSoPhong()));
 
 
@@ -135,35 +141,31 @@ public class HoaDonAdapter extends BaseAdapter {
                         ImageView image_ngaybatdau = view.findViewById(R.id.image_ngaybatdaus);
                         ImageView image_ngayketthuc = view.findViewById(R.id.image_ngayketthucs);
                         Button buttontongtien = view.findViewById(R.id.tongtiens);
-                        Spinner spinner = view.findViewById(R.id.spinnerupdate);
-                        EditText ed_tienDien_HDon = view.findViewById(R.id.ed_TienDien_HDons);
-                        EditText ed_tienNuoc_HDon = view.findViewById(R.id.ed_TienNuoc_HDons);
-                        EditText ed_tienPhong_HDon = view.findViewById(R.id.ed_TienPhong_HDons);
-                        EditText ed_tongTien_HDon = view.findViewById(R.id.ed_TongTien_HDons);
-                        EditText ed_chiPhiKhac_HDon = view.findViewById(R.id.ed_ChiPhiKhac_HDons);
+                        EditText edsophong = view.findViewById(R.id.ed_updatesophong);
+                        EditText edt_tienDien_HDon = view.findViewById(R.id.ed_TienDien_HDons);
+                        EditText edt_tienNuoc_HDon = view.findViewById(R.id.ed_TienNuoc_HDons);
+                        EditText edt_tienPhong_HDon = view.findViewById(R.id.ed_TienPhong_HDons);
+                        EditText edt_tongTien_HDon = view.findViewById(R.id.ed_TongTien_HDons);
+                        EditText edt_chiPhiKhac_HDon = view.findViewById(R.id.ed_ChiPhiKhac_HDons);
                         EditText edt_batdau_hd = view.findViewById(R.id.ed_batDau_HDons);
                         EditText edt_hethan_hd = view.findViewById(R.id.ed_ketThuc_HDons);
                         Phong phong = new Phong();
                         PhongDAO phongDAO = new PhongDAO(context);
                         phongDAO.open();
                         ArrayList<Phong> listt= phongDAO.getAll();
-                        SpinnerAdapter spinnerAdapter = new SpinnerAdapter(listt);
-                        spinner.setAdapter(spinnerAdapter);
-                        spinner.setSelection(phong.getSoPhong());
+                        Log.d("zzz", String.valueOf(listt));
+                        edsophong.setText(hoaDon.getSoPhong()+"");
 
-                        HoaDon hoaDon = list.get(i);
-                        edt_batdau_hd.setText(hoaDon.getNgayBatDau());
-                        edt_hethan_hd.setText(hoaDon.getNgayHetHan());
-                        ed_tienDien_HDon.setText(list.get(i).getTienDien());
-
+                        HoaDon hoaDon1 =list.get(i);
+                        edt_batdau_hd.setText(hoaDon1.getNgayBatDau());
+                        edt_hethan_hd.setText(hoaDon1.getNgayHetHan());
+                        edt_tienDien_HDon.setText(hoaDon1.getTienDien()+"");
 
 
-
-//
-//                        ed_tienNuoc_HDon.setText(hoaDon.getTienNuoc());
-//                        ed_tienPhong_HDon.setText(hoaDon.getTienPhong());
-//                        ed_chiPhiKhac_HDon.setText(hoaDon.getChiPhiKhac());
-//                        ed_tongTien_HDon.setText(hoaDon.getTongTien());
+                      edt_tienNuoc_HDon.setText(hoaDon1.getTienNuoc()+"");
+                      edt_tienPhong_HDon.setText(hoaDon1.getTienPhong()+"");
+                      edt_chiPhiKhac_HDon.setText(hoaDon1.getChiPhiKhac()+"");
+                      edt_tongTien_HDon.setText(hoaDon1.getTongTien()+"");
 
 
 
@@ -175,23 +177,44 @@ public class HoaDonAdapter extends BaseAdapter {
                             @Override
                             public void onClick(View v) {
 
-                                String dien =ed_tienDien_HDon.getText().toString();
+                                String dien =edt_tienDien_HDon.getText().toString();
                                 int dien1 = Integer.parseInt(dien);
-                                String nuoc =ed_tienNuoc_HDon.getText().toString();
+                                String nuoc =edt_tienNuoc_HDon.getText().toString();
                                 int nuoc1 = Integer.parseInt(nuoc);
-                                String phong =ed_tienPhong_HDon.getText().toString();
+                                String phong =edt_tienPhong_HDon.getText().toString();
                                 int phong1 = Integer.parseInt(phong);
-                                String khac =ed_chiPhiKhac_HDon.getText().toString();
+                                String khac =edt_chiPhiKhac_HDon.getText().toString();
                                 int khac1 = Integer.parseInt(khac);
                                 int tong = (dien1*4000)+(nuoc1*3000)+phong1+khac1;
-                                ed_tongTien_HDon.setText(String.valueOf(tong));
+                                edt_tongTien_HDon.setText(String.valueOf(tong));
 
                             }
                         });
                         btn_sua_HD.setOnClickListener(new View.OnClickListener() {
+
+
                             @Override
                             public void onClick(View v) {
+                                hoaDon.setSoPhong(Integer.parseInt((edsophong.getText().toString())));
+                                hoaDon.setNgayBatDau(edt_batdau_hd.getText().toString());
+                                hoaDon.setNgayHetHan(edt_hethan_hd.getText().toString());
+                                hoaDon.setTienDien(Integer.parseInt(edt_tienDien_HDon.getText().toString()));
+                                hoaDon.setTienNuoc(Integer.parseInt(edt_tienNuoc_HDon.getText().toString()));
+                                hoaDon.setTienPhong(Integer.parseInt(edt_tienPhong_HDon.getText().toString()));
+                                hoaDon.setChiPhiKhac(Integer.parseInt(edt_chiPhiKhac_HDon.getText().toString()));
+                                hoaDon.setTongTien(Integer.parseInt(edt_tongTien_HDon.getText().toString()));
 
+                                if(dao.updateHoaDon(hoaDon)){
+                                    Toast.makeText(context,"cập nhật thành công",Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+                                    listhd.clear();
+                                    listhd.addAll(dao.getAll());
+                                    notifyDataSetChanged();
+                                }else {
+                                    Toast.makeText(context,"cập nhật k thành công",Toast.LENGTH_SHORT).show();
+
+                                }
+                                dialog.dismiss();
                             }
                         });
 

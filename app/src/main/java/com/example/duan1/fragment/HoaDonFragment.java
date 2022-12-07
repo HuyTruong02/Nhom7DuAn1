@@ -159,6 +159,7 @@ public class HoaDonFragment extends Fragment  implements interfaceDeleteClickdis
         List<Phong> listt = new ArrayList<>();
         phongdao = new PhongDAO(context);
         listt = phongdao.getAll();
+        Log.d("zzz", String.valueOf(listt));
         Spinner spinner = view.findViewById(R.id.spinner);
         SpinnerAdapter adapter = new SpinnerAdapter(listt,context);
         spinner.setAdapter(adapter);

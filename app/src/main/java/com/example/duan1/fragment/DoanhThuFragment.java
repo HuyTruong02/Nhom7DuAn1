@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.duan1.DAO.DichVuDAO;
 import com.example.duan1.DAO.HoaDonDAO;
 import com.example.duan1.Model.HoaDon;
 import com.example.duan1.R;
@@ -42,6 +43,7 @@ public class DoanhThuFragment extends Fragment {
         img_doanh_thu_namkt=view.findViewById(R.id.img_doanh_thu_namKT);
         ed_doanh_thu_nambd = view.findViewById(R.id.ed_doanh_thu_namBd);
         ed_doanh_thu_namkt=view.findViewById(R.id.ed_doanh_thu_namKT);
+
         btn_xemDTN = view.findViewById(R.id.btn_xemDTN);
         doanhthu=view.findViewById(R.id.txtDoanhthu);
         //----------------
