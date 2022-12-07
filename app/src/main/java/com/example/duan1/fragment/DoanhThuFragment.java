@@ -27,7 +27,7 @@ public class DoanhThuFragment extends Fragment {
     ImageView img_doanh_thu_nambd,img_doanh_thu_namkt;
     EditText ed_doanh_thu_nambd,ed_doanh_thu_namkt;
     Button btn_xemDTN;
-    TextView doanhthu;
+    TextView doanhthu,dichvu;
     public DoanhThuFragment() {
         // Required empty public constructor
     }
@@ -46,6 +46,7 @@ public class DoanhThuFragment extends Fragment {
 
         btn_xemDTN = view.findViewById(R.id.btn_xemDTN);
         doanhthu=view.findViewById(R.id.txtDoanhthu);
+        dichvu = view.findViewById(R.id.txtDichVu);
         //----------------
         Calendar calendar = Calendar.getInstance();//Lay time
         final int year = calendar.get(Calendar.YEAR);
@@ -83,8 +84,7 @@ public class DoanhThuFragment extends Fragment {
                 String tuNgay=ed_doanh_thu_nambd.getText().toString();
                 String denNgay=ed_doanh_thu_namkt.getText().toString();
                 HoaDonDAO HDDAO= new HoaDonDAO(getActivity());
-               doanhthu.setText("Doanh thu:"+HDDAO.getDanhThu(tuNgay,denNgay)+"VND");
-
+               doanhthu.setText("Doanh thu : "+HDDAO.getDanhThu(tuNgay,denNgay)+" VND ");
 
             }
         });

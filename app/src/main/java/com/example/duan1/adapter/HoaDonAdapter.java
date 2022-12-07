@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
@@ -20,11 +19,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.duan1.Activity.Detail_HoaDon;
 import com.example.duan1.Activity.interfaceDeleteClickdistioner;
 import com.example.duan1.DAO.HoaDonDAO;
 import com.example.duan1.DAO.PhongDAO;
@@ -32,10 +29,8 @@ import com.example.duan1.Model.HoaDon;
 import com.example.duan1.Model.Phong;
 import com.example.duan1.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -276,14 +271,54 @@ public class HoaDonAdapter extends BaseAdapter {
                 detail_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(context, Detail_HoaDon.class);
-                        context.startActivity(intent);
+//                        Intent intent = new Intent(context, Detail_HoaDon.class);
+//                        context.startActivity(intent);
+                        opendetail(hoaDon);
+                        dialog.dismiss();
                     }
 
+
                 });
+                dialog.show();
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
+                dialog.getWindow().setGravity(Gravity.BOTTOM);
             }
         });
+
         return view;
+    }
+    private  void  opendetail(HoaDon hoadon){
+        Dialog dialog=new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_hoadon);
+
+        TextView edsophong = dialog.findViewById(R.id.sophongchitiet);
+        TextView edt_tienDien_HDon = dialog.findViewById(R.id.tiendienchitiet);
+        TextView edt_tienNuoc_HDon = dialog.findViewById(R.id.tiennuocchitiet);
+        TextView edt_tienPhong_HDon = dialog.findViewById(R.id.tienphongchitiet);
+        TextView edt_tongTien_HDon = dialog.findViewById(R.id.tongtienchitiet);
+        TextView edt_chiPhiKhac_HDon = dialog.findViewById(R.id.chiphikhacchitiet);
+        TextView edt_batdau_hd = dialog.findViewById(R.id.ngaybatdauchitiet);
+        TextView edt_hethan_hd = dialog.findViewById(R.id.ngayhethanchitiet);
+
+        edsophong.setText("Số phòng :" +"  "+ hoadon.getSoPhong());
+        edt_batdau_hd.setText("Ngày bắt đầu :"  +"  "+hoadon.getNgayBatDau());
+        edt_hethan_hd.setText("Ngày hết hạn :"  +"  "+hoadon.getNgayHetHan());
+        edt_tienDien_HDon.setText("Tiền điện :"  +"  "+hoadon.getTienDien());
+        edt_tienNuoc_HDon.setText("Tiền nước :"  +"  "+hoadon.getTienNuoc());
+        edt_tienPhong_HDon.setText("Tiền phòng :"  +"  "+hoadon.getTienPhong());
+        edt_chiPhiKhac_HDon.setText("Chi Phí Khác :"  +"  "+hoadon.getChiPhiKhac());
+        edt_tongTien_HDon.setText("Tổng tiền :"  +"  "+hoadon.getTongTien());
+
+
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        dialog.getWindow().getAttributes().windowAnimations=R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.CENTER);
     }
 
 }
